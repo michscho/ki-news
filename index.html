@@ -1,0 +1,2769 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI News Daily Pro</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Sans+Pro:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary-color: #1a1a2e;
+        --secondary-color: #16213e;
+        --accent-color: #e94560;
+        --accent-hover: #ff6b6b;
+        --text-primary: #1a1a2e;
+        --text-secondary: #4a4a68;
+        --text-light: #8888a4;
+        --bg-primary: #ffffff;
+        --bg-secondary: #f8f9fa;
+        --bg-tertiary: #eef0f5;
+        --border-color: #e1e5eb;
+        --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+        --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+        --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.15);
+        --transition: all 0.3s ease;
+        --radius-sm: 4px;
+        --radius-md: 8px;
+        --radius-lg: 12px;
+      }
+
+      [data-theme="dark"] {
+        --primary-color: #e8e8e8;
+        --secondary-color: #c8c8c8;
+        --text-primary: #f0f0f0;
+        --text-secondary: #b0b0b0;
+        --text-light: #888888;
+        --bg-primary: #1a1a2e;
+        --bg-secondary: #16213e;
+        --bg-tertiary: #0f1525;
+        --border-color: #2a2a4e;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Source Sans Pro", sans-serif;
+        background-color: var(--bg-secondary);
+        color: var(--text-primary);
+        line-height: 1.6;
+        transition: var(--transition);
+      }
+
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* Header */
+      .main-header {
+        background: var(--bg-primary);
+        box-shadow: var(--shadow-sm);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .header-top {
+        background: linear-gradient(135deg, var(--accent-color), #667eea);
+        color: white;
+        padding: 8px 0;
+        font-size: 0.85rem;
+      }
+
+      .header-top .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .header-controls {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+
+      .icon-btn {
+        background: rgba(255, 255, 255, 0.15);
+        border: none;
+        color: white;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.1rem;
+      }
+
+      .icon-btn:hover {
+        background: rgba(255, 255, 255, 0.25);
+        transform: scale(1.1);
+      }
+
+      .header-main {
+        padding: 20px 0;
+        text-align: center;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .logo {
+        font-family: "Playfair Display", serif;
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        letter-spacing: 2px;
+      }
+
+      .logo-badge {
+        background: var(--accent-color);
+        color: white;
+        font-size: 0.6rem;
+        padding: 2px 8px;
+        border-radius: 10px;
+        vertical-align: super;
+        font-family: "Source Sans Pro", sans-serif;
+      }
+
+      .tagline {
+        color: var(--text-light);
+        font-size: 0.9rem;
+        margin-top: 4px;
+      }
+
+      /* Navigation */
+      .main-nav {
+        background: var(--bg-primary);
+        border-bottom: 3px solid var(--accent-color);
+        overflow-x: auto;
+      }
+
+      .nav-list {
+        display: flex;
+        justify-content: center;
+        list-style: none;
+        gap: 0;
+      }
+
+      .nav-list a {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 12px 18px;
+        color: var(--text-primary);
+        text-decoration: none;
+        font-weight: 600;
+        transition: var(--transition);
+        border-bottom: 3px solid transparent;
+        margin-bottom: -3px;
+        white-space: nowrap;
+      }
+
+      .nav-list a:hover,
+      .nav-list a.active {
+        color: var(--accent-color);
+        border-bottom-color: var(--accent-color);
+      }
+
+      .nav-badge {
+        background: var(--accent-color);
+        color: white;
+        font-size: 0.65rem;
+        padding: 2px 6px;
+        border-radius: 10px;
+      }
+
+      /* Topic Bar */
+      .topic-bar {
+        background: linear-gradient(
+          135deg,
+          #1a1a2e 0%,
+          #16213e 50%,
+          #0f3460 100%
+        );
+        padding: 30px 0;
+      }
+
+      .topic-input-wrapper {
+        display: flex;
+        gap: 12px;
+        max-width: 900px;
+        margin: 0 auto;
+        flex-wrap: wrap;
+      }
+
+      .topic-input {
+        flex: 1;
+        min-width: 250px;
+        padding: 14px 18px;
+        font-size: 1rem;
+        border: 2px solid transparent;
+        border-radius: var(--radius-md);
+        outline: none;
+        transition: var(--transition);
+      }
+
+      .topic-input:focus {
+        border-color: var(--accent-color);
+        box-shadow: 0 0 0 3px rgba(233, 69, 96, 0.2);
+      }
+
+      .btn-group {
+        display: flex;
+        gap: 8px;
+      }
+
+      .generate-btn {
+        background: var(--accent-color);
+        color: white;
+        border: none;
+        padding: 14px 28px;
+        font-size: 1rem;
+        font-weight: 600;
+        border-radius: var(--radius-md);
+        cursor: pointer;
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .generate-btn:hover:not(:disabled) {
+        background: var(--accent-hover);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(233, 69, 96, 0.4);
+      }
+
+      .generate-btn:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+      }
+
+      .surprise-btn {
+        background: rgba(255, 255, 255, 0.15);
+        color: white;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        padding: 14px 18px;
+        font-size: 1rem;
+        border-radius: var(--radius-md);
+        cursor: pointer;
+        transition: var(--transition);
+      }
+
+      .surprise-btn:hover {
+        background: rgba(255, 255, 255, 0.25);
+      }
+
+      .quick-topics {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 15px;
+      }
+
+      .quick-topic {
+        background: rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.9);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        cursor: pointer;
+        transition: var(--transition);
+      }
+
+      .quick-topic:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+      }
+
+      /* Breaking News */
+      .breaking-news {
+        background: linear-gradient(90deg, var(--accent-color), #ff6b6b);
+        color: white;
+        padding: 10px 0;
+        overflow: hidden;
+      }
+
+      .breaking-news .container {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .breaking-label {
+        background: white;
+        color: var(--accent-color);
+        padding: 4px 12px;
+        font-weight: 700;
+        font-size: 0.75rem;
+        border-radius: var(--radius-sm);
+        white-space: nowrap;
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.8;
+          transform: scale(0.98);
+        }
+      }
+
+      .ticker-text {
+        flex: 1;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      /* Stats Bar */
+      .stats-bar {
+        background: var(--bg-primary);
+        border-bottom: 1px solid var(--border-color);
+        padding: 10px 0;
+      }
+
+      .stats-container {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        flex-wrap: wrap;
+      }
+
+      .stat-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--text-secondary);
+        font-size: 0.85rem;
+      }
+
+      .stat-value {
+        font-weight: 700;
+        color: var(--accent-color);
+      }
+
+      /* Main Content */
+      .main-content {
+        padding: 30px 0;
+      }
+
+      .content-grid {
+        display: grid;
+        grid-template-columns: 1fr 300px;
+        gap: 25px;
+      }
+
+      /* Skeleton Loading */
+      .skeleton {
+        background: linear-gradient(
+          90deg,
+          var(--bg-tertiary) 25%,
+          var(--bg-secondary) 50%,
+          var(--bg-tertiary) 75%
+        );
+        background-size: 200% 100%;
+        animation: skeleton-loading 1.5s infinite;
+        border-radius: var(--radius-sm);
+      }
+
+      @keyframes skeleton-loading {
+        0% {
+          background-position: 200% 0;
+        }
+        100% {
+          background-position: -200% 0;
+        }
+      }
+
+      .skeleton-title {
+        height: 28px;
+        margin-bottom: 12px;
+        width: 80%;
+      }
+
+      .skeleton-text {
+        height: 16px;
+        margin-bottom: 8px;
+      }
+
+      .skeleton-text:last-child {
+        width: 60%;
+      }
+
+      /* Article Cards */
+      .article-card {
+        background: var(--bg-primary);
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        box-shadow: var(--shadow-sm);
+        transition: var(--transition);
+        position: relative;
+      }
+
+      .article-card:hover {
+        box-shadow: var(--shadow-lg);
+        transform: translateY(-4px);
+      }
+
+      .article-card.featured {
+        grid-column: span 2;
+      }
+
+      .article-image {
+        height: 250px;
+        background: linear-gradient(
+          135deg,
+          var(--bg-tertiary),
+          var(--bg-secondary)
+        );
+        position: relative;
+        overflow: hidden;
+      }
+
+      .article-card.featured .article-image {
+        height: 350px;
+      }
+
+      .article-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: var(--transition);
+      }
+
+      .article-card:hover .article-image img {
+        transform: scale(1.05);
+      }
+
+      .image-placeholder {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-light);
+        font-size: 3rem;
+      }
+
+      .article-badge {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        background: var(--accent-color);
+        color: white;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        z-index: 2;
+      }
+
+      .article-badge.ai {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+      }
+
+      .bookmark-btn {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: rgba(255, 255, 255, 0.9);
+        border: none;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: var(--transition);
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .bookmark-btn:hover {
+        background: white;
+        transform: scale(1.1);
+      }
+
+      .bookmark-btn.active {
+        background: var(--accent-color);
+        color: white;
+      }
+
+      .article-content {
+        padding: 20px;
+      }
+
+      .article-meta-top {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 10px;
+        flex-wrap: wrap;
+      }
+
+      .category {
+        background: var(--accent-color);
+        color: white;
+        padding: 3px 10px;
+        font-size: 0.7rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        border-radius: var(--radius-sm);
+      }
+
+      .reading-time {
+        color: var(--text-light);
+        font-size: 0.8rem;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+
+      .article-title {
+        font-family: "Playfair Display", serif;
+        font-size: 1.4rem;
+        line-height: 1.3;
+        margin-bottom: 10px;
+        color: var(--text-primary);
+        cursor: pointer;
+        transition: var(--transition);
+      }
+
+      .article-title:hover {
+        color: var(--accent-color);
+      }
+
+      .article-card.featured .article-title {
+        font-size: 1.8rem;
+      }
+
+      .article-teaser {
+        color: var(--text-secondary);
+        margin-bottom: 15px;
+        line-height: 1.6;
+        font-size: 0.95rem;
+      }
+
+      .article-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 15px;
+        border-top: 1px solid var(--border-color);
+      }
+
+      .article-meta {
+        display: flex;
+        gap: 15px;
+        color: var(--text-light);
+        font-size: 0.8rem;
+      }
+
+      .article-actions {
+        display: flex;
+        gap: 8px;
+      }
+
+      .action-btn {
+        background: var(--bg-tertiary);
+        border: none;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.9rem;
+      }
+
+      .action-btn:hover {
+        background: var(--accent-color);
+        color: white;
+      }
+
+      /* Articles Grid */
+      .articles-section {
+        margin-bottom: 30px;
+      }
+
+      .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .section-title {
+        font-family: "Playfair Display", serif;
+        font-size: 1.4rem;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .section-title::after {
+        content: "";
+        flex: 1;
+        height: 2px;
+        background: linear-gradient(90deg, var(--accent-color), transparent);
+        margin-left: 15px;
+      }
+
+      .view-toggle {
+        display: flex;
+        gap: 5px;
+      }
+
+      .view-btn {
+        background: var(--bg-tertiary);
+        border: none;
+        padding: 8px 12px;
+        border-radius: var(--radius-sm);
+        cursor: pointer;
+        transition: var(--transition);
+      }
+
+      .view-btn.active {
+        background: var(--accent-color);
+        color: white;
+      }
+
+      .articles-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+      }
+
+      .articles-grid.list-view {
+        grid-template-columns: 1fr;
+      }
+
+      .articles-grid.list-view .article-card {
+        display: grid;
+        grid-template-columns: 250px 1fr;
+      }
+
+      .articles-grid.list-view .article-image {
+        height: 100%;
+        min-height: 180px;
+      }
+
+      /* Sidebar */
+      .sidebar {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .sidebar-widget {
+        background: var(--bg-primary);
+        border-radius: var(--radius-md);
+        padding: 20px;
+        box-shadow: var(--shadow-sm);
+      }
+
+      .widget-title {
+        font-size: 1rem;
+        font-weight: 700;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid var(--accent-color);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      /* Trending Widget */
+      .trending-list {
+        list-style: none;
+      }
+
+      .trending-item {
+        display: flex;
+        gap: 12px;
+        padding: 12px 0;
+        border-bottom: 1px solid var(--border-color);
+        cursor: pointer;
+        transition: var(--transition);
+      }
+
+      .trending-item:hover {
+        padding-left: 10px;
+      }
+
+      .trending-item:last-child {
+        border-bottom: none;
+      }
+
+      .trend-rank {
+        font-family: "Playfair Display", serif;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--accent-color);
+        min-width: 30px;
+      }
+
+      .trend-content {
+        flex: 1;
+      }
+
+      .trend-title {
+        font-size: 0.9rem;
+        line-height: 1.4;
+        margin-bottom: 4px;
+      }
+
+      .trend-meta {
+        font-size: 0.75rem;
+        color: var(--text-light);
+      }
+
+      /* Live Stats Widget */
+      .live-indicator {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        color: #4caf50;
+        font-size: 0.8rem;
+        margin-bottom: 15px;
+      }
+
+      .live-dot {
+        width: 8px;
+        height: 8px;
+        background: #4caf50;
+        border-radius: 50%;
+        animation: live-pulse 1.5s infinite;
+      }
+
+      @keyframes live-pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.5;
+        }
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+      }
+
+      .stat-box {
+        text-align: center;
+        padding: 15px;
+        background: var(--bg-secondary);
+        border-radius: var(--radius-sm);
+      }
+
+      .stat-box .value {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--accent-color);
+      }
+
+      .stat-box .label {
+        font-size: 0.75rem;
+        color: var(--text-light);
+        margin-top: 4px;
+      }
+
+      /* Tags Widget */
+      .tags-cloud {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .tag {
+        background: var(--bg-secondary);
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        cursor: pointer;
+        transition: var(--transition);
+      }
+
+      .tag:hover {
+        background: var(--accent-color);
+        color: white;
+      }
+
+      /* Newsletter Widget */
+      .newsletter-form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .newsletter-form input {
+        padding: 12px;
+        border: 2px solid var(--border-color);
+        border-radius: var(--radius-sm);
+        font-size: 0.9rem;
+        transition: var(--transition);
+      }
+
+      .newsletter-form input:focus {
+        border-color: var(--accent-color);
+        outline: none;
+      }
+
+      .newsletter-form button {
+        background: var(--accent-color);
+        color: white;
+        border: none;
+        padding: 12px;
+        border-radius: var(--radius-sm);
+        font-weight: 600;
+        cursor: pointer;
+        transition: var(--transition);
+      }
+
+      .newsletter-form button:hover {
+        background: var(--accent-hover);
+      }
+
+      /* Footer */
+      .main-footer {
+        background: var(--primary-color);
+        color: white;
+        padding: 50px 0 20px;
+        margin-top: 50px;
+      }
+
+      [data-theme="dark"] .main-footer {
+        background: #0a0a15;
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 40px;
+        margin-bottom: 40px;
+      }
+
+      .footer-section h4 {
+        margin-bottom: 20px;
+      }
+
+      .footer-section p {
+        color: rgba(255, 255, 255, 0.7);
+        line-height: 1.7;
+        font-size: 0.9rem;
+      }
+
+      .footer-section ul {
+        list-style: none;
+      }
+
+      .footer-section ul li {
+        margin-bottom: 10px;
+      }
+
+      .footer-section ul a {
+        color: rgba(255, 255, 255, 0.7);
+        text-decoration: none;
+        transition: var(--transition);
+      }
+
+      .footer-section ul a:hover {
+        color: var(--accent-color);
+      }
+
+      .social-links {
+        display: flex;
+        gap: 10px;
+      }
+
+      .social-link {
+        width: 40px;
+        height: 40px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: var(--transition);
+        text-decoration: none;
+        font-size: 1.2rem;
+      }
+
+      .social-link:hover {
+        background: var(--accent-color);
+        transform: translateY(-3px);
+      }
+
+      .footer-bottom {
+        text-align: center;
+        padding-top: 20px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 0.85rem;
+      }
+
+      /* Modals */
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 1000;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        overflow-y: auto;
+        backdrop-filter: blur(5px);
+      }
+
+      .modal.active {
+        display: flex;
+      }
+
+      .modal-content {
+        background: var(--bg-primary);
+        border-radius: var(--radius-lg);
+        max-width: 600px;
+        width: 100%;
+        max-height: 90vh;
+        overflow-y: auto;
+        animation: modalSlide 0.3s ease;
+      }
+
+      .article-modal-content {
+        max-width: 800px;
+      }
+
+      @keyframes modalSlide {
+        from {
+          opacity: 0;
+          transform: translateY(-30px) scale(0.95);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        border-bottom: 1px solid var(--border-color);
+        position: sticky;
+        top: 0;
+        background: var(--bg-primary);
+        z-index: 10;
+      }
+
+      .modal-header h2 {
+        font-size: 1.2rem;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .close-btn {
+        background: var(--bg-tertiary);
+        border: none;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: var(--transition);
+        font-size: 1.2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .close-btn:hover {
+        background: var(--accent-color);
+        color: white;
+      }
+
+      .modal-body {
+        padding: 25px;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-group label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 8px;
+        font-size: 0.9rem;
+      }
+
+      .form-group input,
+      .form-group select,
+      .form-group textarea {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid var(--border-color);
+        border-radius: var(--radius-sm);
+        font-size: 0.95rem;
+        transition: var(--transition);
+        background: var(--bg-primary);
+        color: var(--text-primary);
+      }
+
+      .form-group input:focus,
+      .form-group select:focus,
+      .form-group textarea:focus {
+        border-color: var(--accent-color);
+        outline: none;
+      }
+
+      .form-hint {
+        font-size: 0.75rem;
+        color: var(--text-light);
+        margin-top: 6px;
+      }
+
+      .input-group {
+        display: flex;
+        gap: 8px;
+      }
+
+      .input-group input {
+        flex: 1;
+      }
+
+      .input-group button {
+        padding: 0 15px;
+        background: var(--bg-tertiary);
+        border: 2px solid var(--border-color);
+        border-radius: var(--radius-sm);
+        cursor: pointer;
+        transition: var(--transition);
+      }
+
+      .input-group button:hover {
+        background: var(--bg-secondary);
+      }
+
+      /* Tabs */
+      .tabs {
+        display: flex;
+        border-bottom: 2px solid var(--border-color);
+        margin-bottom: 20px;
+      }
+
+      .tab {
+        padding: 12px 20px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-weight: 600;
+        color: var(--text-secondary);
+        transition: var(--transition);
+        position: relative;
+      }
+
+      .tab.active {
+        color: var(--accent-color);
+      }
+
+      .tab.active::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: var(--accent-color);
+      }
+
+      .tab-content {
+        display: none;
+      }
+
+      .tab-content.active {
+        display: block;
+      }
+
+      /* Toggle Switch */
+      .toggle-group {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 0;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .toggle-label {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .toggle-label span:first-child {
+        font-weight: 600;
+      }
+
+      .toggle-label span:last-child {
+        font-size: 0.8rem;
+        color: var(--text-light);
+      }
+
+      .toggle-switch {
+        position: relative;
+        width: 50px;
+        height: 26px;
+      }
+
+      .toggle-switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      .toggle-slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: var(--bg-tertiary);
+        border-radius: 26px;
+        transition: var(--transition);
+      }
+
+      .toggle-slider::before {
+        content: "";
+        position: absolute;
+        height: 20px;
+        width: 20px;
+        left: 3px;
+        bottom: 3px;
+        background: white;
+        border-radius: 50%;
+        transition: var(--transition);
+      }
+
+      .toggle-switch input:checked + .toggle-slider {
+        background: var(--accent-color);
+      }
+
+      .toggle-switch input:checked + .toggle-slider::before {
+        transform: translateX(24px);
+      }
+
+      .modal-footer {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        padding: 20px;
+        border-top: 1px solid var(--border-color);
+      }
+
+      .btn {
+        padding: 12px 24px;
+        border-radius: var(--radius-sm);
+        font-weight: 600;
+        cursor: pointer;
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .btn-primary {
+        background: var(--accent-color);
+        color: white;
+        border: none;
+      }
+
+      .btn-primary:hover {
+        background: var(--accent-hover);
+      }
+
+      .btn-secondary {
+        background: var(--bg-tertiary);
+        color: var(--text-primary);
+        border: 2px solid var(--border-color);
+      }
+
+      .btn-secondary:hover {
+        background: var(--bg-secondary);
+      }
+
+      /* Article Modal */
+      .article-modal-image {
+        width: 100%;
+        height: 300px;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 5rem;
+        margin-bottom: 20px;
+        border-radius: var(--radius-md);
+      }
+
+      .article-modal-title {
+        font-family: "Playfair Display", serif;
+        font-size: 1.8rem;
+        line-height: 1.3;
+        margin-bottom: 15px;
+      }
+
+      .article-modal-meta {
+        display: flex;
+        gap: 20px;
+        color: var(--text-light);
+        font-size: 0.9rem;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+      }
+
+      .article-modal-content {
+        line-height: 1.8;
+        font-size: 1.05rem;
+      }
+
+      .article-modal-content p {
+        margin-bottom: 15px;
+      }
+
+      .article-modal-footer {
+        margin-top: 25px;
+        padding-top: 20px;
+        border-top: 1px solid var(--border-color);
+      }
+
+      .share-section h4 {
+        margin-bottom: 12px;
+        font-size: 0.9rem;
+      }
+
+      .share-buttons {
+        display: flex;
+        gap: 10px;
+      }
+
+      .share-btn {
+        padding: 10px 16px;
+        background: var(--bg-secondary);
+        border: none;
+        border-radius: var(--radius-sm);
+        cursor: pointer;
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.85rem;
+      }
+
+      .share-btn:hover {
+        background: var(--accent-color);
+        color: white;
+      }
+
+      /* Loading Overlay */
+      .loading-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(26, 26, 46, 0.95);
+        z-index: 2000;
+        align-items: center;
+        justify-content: center;
+        backdrop-filter: blur(5px);
+      }
+
+      .loading-overlay.active {
+        display: flex;
+      }
+
+      .loading-content {
+        text-align: center;
+        color: white;
+      }
+
+      .loading-animation {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 25px;
+        position: relative;
+      }
+
+      .loading-circle {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border: 4px solid transparent;
+        border-top-color: var(--accent-color);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+
+      .loading-circle:nth-child(2) {
+        width: 60px;
+        height: 60px;
+        top: 10px;
+        left: 10px;
+        border-top-color: #667eea;
+        animation-duration: 0.8s;
+        animation-direction: reverse;
+      }
+
+      .loading-circle:nth-child(3) {
+        width: 40px;
+        height: 40px;
+        top: 20px;
+        left: 20px;
+        border-top-color: #764ba2;
+        animation-duration: 0.6s;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .loading-text {
+        font-size: 1.3rem;
+        margin-bottom: 10px;
+      }
+
+      .loading-subtext {
+        color: rgba(255, 255, 255, 0.6);
+      }
+
+      .loading-progress {
+        width: 200px;
+        height: 4px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 2px;
+        margin: 20px auto 0;
+        overflow: hidden;
+      }
+
+      .loading-progress-bar {
+        height: 100%;
+        background: var(--accent-color);
+        border-radius: 2px;
+        width: 0%;
+        transition: width 0.3s ease;
+      }
+
+      /* Toast Notifications */
+      .toast-container {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 3000;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .toast {
+        background: var(--bg-primary);
+        color: var(--text-primary);
+        padding: 15px 20px;
+        border-radius: var(--radius-md);
+        box-shadow: var(--shadow-lg);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        animation: toastSlide 0.4s ease;
+        max-width: 350px;
+        border-left: 4px solid var(--accent-color);
+      }
+
+      .toast.success {
+        border-left-color: #4caf50;
+      }
+      .toast.error {
+        border-left-color: var(--accent-color);
+      }
+      .toast.warning {
+        border-left-color: #ff9800;
+      }
+
+      .toast-icon {
+        font-size: 1.3rem;
+      }
+
+      .toast-content {
+        flex: 1;
+      }
+
+      .toast-title {
+        font-weight: 600;
+        margin-bottom: 2px;
+      }
+
+      .toast-message {
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+      }
+
+      .toast-close {
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: var(--text-light);
+        padding: 5px;
+      }
+
+      @keyframes toastSlide {
+        from {
+          opacity: 0;
+          transform: translateX(100%);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      /* Responsive */
+      @media (max-width: 1024px) {
+        .content-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .sidebar {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 15px;
+        }
+
+        .article-card.featured {
+          grid-column: span 1;
+        }
+
+        .articles-grid.list-view .article-card {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .logo {
+          font-size: 1.8rem;
+        }
+
+        .topic-input-wrapper {
+          flex-direction: column;
+        }
+
+        .btn-group {
+          width: 100%;
+        }
+
+        .generate-btn {
+          flex: 1;
+        }
+
+        .articles-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .sidebar {
+          grid-template-columns: 1fr;
+        }
+
+        .header-top .container {
+          flex-direction: column;
+        }
+
+        .stats-container {
+          gap: 15px;
+        }
+
+        .modal-content {
+          margin: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body data-theme="light">
+    <!-- Header -->
+    <header class="main-header">
+      <div class="header-top">
+        <div class="container">
+          <span class="date" id="currentDate"></span>
+          <div class="header-controls">
+            <button class="icon-btn" id="themeToggle" title="Dark/Light Mode">
+              🌙
+            </button>
+            <button class="icon-btn" id="settingsBtn" title="Einstellungen">
+              ⚙️
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="header-main">
+        <div class="container">
+          <h1 class="logo">
+            AI NEWS DAILY <span class="logo-badge">PRO</span>
+          </h1>
+          <p class="tagline">
+            Intelligente Nachrichten • KI-generiert • Immer aktuell
+          </p>
+        </div>
+      </div>
+      <nav class="main-nav">
+        <div class="container">
+          <ul class="nav-list">
+            <li><a href="#" class="active">🏠 Start</a></li>
+            <li><a href="#">🏛️ Politik</a></li>
+            <li><a href="#">📈 Wirtschaft</a></li>
+            <li>
+              <a href="#">💻 Tech <span class="nav-badge">Neu</span></a>
+            </li>
+            <li><a href="#">🔬 Wissenschaft</a></li>
+            <li><a href="#">⚽ Sport</a></li>
+            <li><a href="#">🎭 Kultur</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Topic Bar -->
+    <section class="topic-bar">
+      <div class="container">
+        <div class="topic-input-wrapper">
+          <input
+            type="text"
+            id="topicInput"
+            placeholder="🔍 Thema eingeben (z.B. 'Künstliche Intelligenz', 'Elektromobilität')..."
+            class="topic-input"
+          />
+          <div class="btn-group">
+            <button class="generate-btn" id="generateBtn">
+              <span class="btn-text">🚀 Generieren</span>
+              <span class="btn-loading" style="display: none">⏳ Lädt...</span>
+            </button>
+            <button
+              class="surprise-btn"
+              id="surpriseBtn"
+              title="Zufälliges Thema"
+            >
+              🎲
+            </button>
+          </div>
+        </div>
+        <div class="quick-topics">
+          <button class="quick-topic" data-topic="Künstliche Intelligenz">
+            🤖 KI
+          </button>
+          <button class="quick-topic" data-topic="Klimawandel">🌍 Klima</button>
+          <button class="quick-topic" data-topic="Elektromobilität">
+            🚗 E-Autos
+          </button>
+          <button class="quick-topic" data-topic="Kryptowährungen">
+            💰 Krypto
+          </button>
+          <button class="quick-topic" data-topic="Weltraumforschung">
+            🚀 Space
+          </button>
+          <button class="quick-topic" data-topic="Gesundheit und Medizin">
+            🏥 Medizin
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Breaking News -->
+    <div class="breaking-news">
+      <div class="container">
+        <span class="breaking-label">⚡ EILMELDUNG</span>
+        <p class="ticker-text" id="breakingText">
+          Willkommen bei AI News Daily Pro – Konfigurieren Sie Ihren API-Key und
+          geben Sie ein Thema ein
+        </p>
+      </div>
+    </div>
+
+    <!-- Stats Bar -->
+    <div class="stats-bar" id="statsBar" style="display: none">
+      <div class="container">
+        <div class="stats-container">
+          <div class="stat-item">
+            <span>📰</span>
+            <span
+              ><span class="stat-value" id="statArticles">0</span> Artikel
+              generiert</span
+            >
+          </div>
+          <div class="stat-item">
+            <span>⏱️</span>
+            <span
+              >Generiert in
+              <span class="stat-value" id="statTime">0</span>s</span
+            >
+          </div>
+          <div class="stat-item">
+            <span>🤖</span>
+            <span
+              >Modell: <span class="stat-value" id="statModel">-</span></span
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="container">
+        <div class="content-grid">
+          <div class="main-articles">
+            <!-- Featured Article -->
+            <section class="articles-section">
+              <div class="section-header">
+                <h2 class="section-title">📌 Hauptnachricht</h2>
+              </div>
+              <article class="article-card featured" id="heroArticle">
+                <div class="article-image">
+                  <span class="article-badge ai">🤖 KI-Generiert</span>
+                  <button class="bookmark-btn" data-index="0">🔖</button>
+                  <div class="image-placeholder">📰</div>
+                </div>
+                <div class="article-content">
+                  <div class="article-meta-top">
+                    <span class="category">Aktuell</span>
+                    <span class="reading-time">📖 3 Min.</span>
+                  </div>
+                  <h2 class="article-title" data-index="0">
+                    Hier erscheint die Hauptschlagzeile Ihres generierten
+                    Artikels
+                  </h2>
+                  <p class="article-teaser">
+                    Dies ist der Teaser-Text für den Hauptartikel. Geben Sie ein
+                    Thema ein und konfigurieren Sie Ihren API-Key, um
+                    KI-generierte Nachrichten zu erhalten.
+                  </p>
+                  <div class="article-footer">
+                    <div class="article-meta">
+                      <span>👤 AI Redakteur</span>
+                      <span>🕐 Gerade eben</span>
+                    </div>
+                    <div class="article-actions">
+                      <button class="action-btn" title="Teilen">📤</button>
+                      <button class="action-btn" title="Vorlesen">🔊</button>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </section>
+
+            <!-- More Articles -->
+            <section class="articles-section">
+              <div class="section-header">
+                <h2 class="section-title">📰 Weitere Nachrichten</h2>
+                <div class="view-toggle">
+                  <button class="view-btn active" data-view="grid">▦</button>
+                  <button class="view-btn" data-view="list">☰</button>
+                </div>
+              </div>
+              <div class="articles-grid" id="articlesGrid">
+                <!-- Article Cards -->
+                <article class="article-card" id="article1">
+                  <div class="article-image">
+                    <span class="article-badge">Politik</span>
+                    <button class="bookmark-btn" data-index="1">🔖</button>
+                    <div class="image-placeholder">🏛️</div>
+                  </div>
+                  <div class="article-content">
+                    <div class="article-meta-top">
+                      <span class="category">Politik</span>
+                      <span class="reading-time">📖 4 Min.</span>
+                    </div>
+                    <h3 class="article-title" data-index="1">
+                      Politische Entwicklungen im Fokus
+                    </h3>
+                    <p class="article-teaser">
+                      Platzhalter-Text für einen politischen Artikel.
+                    </p>
+                  </div>
+                </article>
+
+                <article class="article-card" id="article2">
+                  <div class="article-image">
+                    <span class="article-badge">Wirtschaft</span>
+                    <button class="bookmark-btn" data-index="2">🔖</button>
+                    <div class="image-placeholder">📊</div>
+                  </div>
+                  <div class="article-content">
+                    <div class="article-meta-top">
+                      <span class="category">Wirtschaft</span>
+                      <span class="reading-time">📖 3 Min.</span>
+                    </div>
+                    <h3 class="article-title" data-index="2">
+                      Wirtschaftsnachrichten und Analysen
+                    </h3>
+                    <p class="article-teaser">
+                      Platzhalter-Text für einen Wirtschaftsartikel.
+                    </p>
+                  </div>
+                </article>
+
+                <article class="article-card" id="article3">
+                  <div class="article-image">
+                    <span class="article-badge">Wissenschaft</span>
+                    <button class="bookmark-btn" data-index="3">🔖</button>
+                    <div class="image-placeholder">🔬</div>
+                  </div>
+                  <div class="article-content">
+                    <div class="article-meta-top">
+                      <span class="category">Wissenschaft</span>
+                      <span class="reading-time">📖 5 Min.</span>
+                    </div>
+                    <h3 class="article-title" data-index="3">
+                      Wissenschaftliche Entdeckungen
+                    </h3>
+                    <p class="article-teaser">
+                      Platzhalter-Text für einen Wissenschaftsartikel.
+                    </p>
+                  </div>
+                </article>
+
+                <article class="article-card" id="article4">
+                  <div class="article-image">
+                    <span class="article-badge">Tech</span>
+                    <button class="bookmark-btn" data-index="4">🔖</button>
+                    <div class="image-placeholder">💻</div>
+                  </div>
+                  <div class="article-content">
+                    <div class="article-meta-top">
+                      <span class="category">Technologie</span>
+                      <span class="reading-time">📖 4 Min.</span>
+                    </div>
+                    <h3 class="article-title" data-index="4">
+                      Technologie-News und Innovationen
+                    </h3>
+                    <p class="article-teaser">
+                      Platzhalter-Text für einen Technologie-Artikel.
+                    </p>
+                  </div>
+                </article>
+
+                <article class="article-card" id="article5">
+                  <div class="article-image">
+                    <span class="article-badge">Sport</span>
+                    <button class="bookmark-btn" data-index="5">🔖</button>
+                    <div class="image-placeholder">⚽</div>
+                  </div>
+                  <div class="article-content">
+                    <div class="article-meta-top">
+                      <span class="category">Sport</span>
+                      <span class="reading-time">📖 3 Min.</span>
+                    </div>
+                    <h3 class="article-title" data-index="5">
+                      Sportnachrichten und Ergebnisse
+                    </h3>
+                    <p class="article-teaser">
+                      Platzhalter-Text für einen Sport-Artikel.
+                    </p>
+                  </div>
+                </article>
+
+                <article class="article-card" id="article6">
+                  <div class="article-image">
+                    <span class="article-badge">Kultur</span>
+                    <button class="bookmark-btn" data-index="6">🔖</button>
+                    <div class="image-placeholder">🎭</div>
+                  </div>
+                  <div class="article-content">
+                    <div class="article-meta-top">
+                      <span class="category">Kultur</span>
+                      <span class="reading-time">📖 4 Min.</span>
+                    </div>
+                    <h3 class="article-title" data-index="6">
+                      Kulturelle Events und Highlights
+                    </h3>
+                    <p class="article-teaser">
+                      Platzhalter-Text für einen Kultur-Artikel.
+                    </p>
+                  </div>
+                </article>
+              </div>
+            </section>
+          </div>
+
+          <!-- Sidebar -->
+          <aside class="sidebar">
+            <!-- Trending -->
+            <div class="sidebar-widget">
+              <h3 class="widget-title">🔥 Trending</h3>
+              <ul class="trending-list" id="trendingList">
+                <li class="trending-item">
+                  <span class="trend-rank">1</span>
+                  <div class="trend-content">
+                    <p class="trend-title">Trending Artikel Nummer eins</p>
+                    <span class="trend-meta">📈 2.4k Leser</span>
+                  </div>
+                </li>
+                <li class="trending-item">
+                  <span class="trend-rank">2</span>
+                  <div class="trend-content">
+                    <p class="trend-title">Trending Artikel Nummer zwei</p>
+                    <span class="trend-meta">📈 1.8k Leser</span>
+                  </div>
+                </li>
+                <li class="trending-item">
+                  <span class="trend-rank">3</span>
+                  <div class="trend-content">
+                    <p class="trend-title">Trending Artikel Nummer drei</p>
+                    <span class="trend-meta">📈 1.2k Leser</span>
+                  </div>
+                </li>
+                <li class="trending-item">
+                  <span class="trend-rank">4</span>
+                  <div class="trend-content">
+                    <p class="trend-title">Trending Artikel Nummer vier</p>
+                    <span class="trend-meta">📈 890 Leser</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Live Stats -->
+            <div class="sidebar-widget">
+              <h3 class="widget-title">📊 Statistiken</h3>
+              <div class="live-indicator">
+                <span class="live-dot"></span>
+                <span>Live</span>
+              </div>
+              <div class="stats-grid">
+                <div class="stat-box">
+                  <div class="value" id="widgetArticleCount">0</div>
+                  <div class="label">Artikel</div>
+                </div>
+                <div class="stat-box">
+                  <div class="value" id="widgetWordCount">0</div>
+                  <div class="label">Wörter</div>
+                </div>
+                <div class="stat-box">
+                  <div class="value" id="widgetBookmarks">0</div>
+                  <div class="label">Lesezeichen</div>
+                </div>
+                <div class="stat-box">
+                  <div class="value" id="widgetTopics">0</div>
+                  <div class="label">Themen</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tags -->
+            <div class="sidebar-widget">
+              <h3 class="widget-title">🏷️ Schlagworte</h3>
+              <div class="tags-cloud" id="tagsCloud">
+                <span class="tag">Technologie</span>
+                <span class="tag">Politik</span>
+                <span class="tag">Wirtschaft</span>
+                <span class="tag">Wissenschaft</span>
+                <span class="tag">Sport</span>
+                <span class="tag">Kultur</span>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-section">
+            <h4>AI NEWS DAILY</h4>
+            <p>
+              Eine Demo-Anwendung zur Generierung von KI-basierten
+              Nachrichtenartikeln mit OpenAI GPT.
+            </p>
+            <div class="social-links" style="margin-top: 15px">
+              <a href="#" class="social-link">📘</a>
+              <a href="#" class="social-link">🐦</a>
+              <a href="#" class="social-link">📸</a>
+              <a href="#" class="social-link">💼</a>
+            </div>
+          </div>
+          <div class="footer-section">
+            <h4>Kategorien</h4>
+            <ul>
+              <li><a href="#">Politik</a></li>
+              <li><a href="#">Wirtschaft</a></li>
+              <li><a href="#">Technologie</a></li>
+              <li><a href="#">Wissenschaft</a></li>
+              <li><a href="#">Sport</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h4>Information</h4>
+            <ul>
+              <li><a href="#">Über uns</a></li>
+              <li><a href="#">Kontakt</a></li>
+              <li><a href="#">API Dokumentation</a></li>
+              <li><a href="#">Impressum</a></li>
+              <li><a href="#">Datenschutz</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h4>Hinweis</h4>
+            <p>
+              ⚠️ Alle Artikel werden von KI generiert und können fiktive
+              Informationen enthalten. Nicht als echte Nachrichtenquelle
+              verwenden.
+            </p>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>© 2024 AI News Daily Pro | Powered by OpenAI GPT | Made with ❤️</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Settings Modal -->
+    <div class="modal" id="settingsModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>⚙️ Einstellungen</h2>
+          <button class="close-btn" id="closeSettings">×</button>
+        </div>
+        <div class="modal-body">
+          <div class="tabs">
+            <button class="tab active" data-tab="api">🔑 API</button>
+            <button class="tab" data-tab="generation">✨ Generierung</button>
+            <button class="tab" data-tab="display">🎨 Anzeige</button>
+          </div>
+
+          <!-- API Tab -->
+          <div class="tab-content active" id="tab-api">
+            <div class="form-group">
+              <label>OpenAI API Key</label>
+              <div class="input-group">
+                <input type="password" id="apiKey" placeholder="sk-..." />
+                <button id="toggleApiKey">👁️</button>
+              </div>
+              <p class="form-hint">
+                ⚠️ Key wird nur im Arbeitsspeicher gespeichert
+              </p>
+            </div>
+            <div class="form-group">
+              <label>Modell</label>
+              <select id="modelSelect">
+                <option value="gpt-3.5-turbo">
+                  GPT-3.5 Turbo (Schnell & Günstig)
+                </option>
+                <option value="gpt-4" selected>GPT-4 (Beste Qualität)</option>
+                <option value="gpt-4-turbo-preview">
+                  GPT-4 Turbo (Neueste Version)
+                </option>
+              </select>
+            </div>
+            <button
+              class="btn btn-secondary"
+              id="testApiBtn"
+              style="width: 100%"
+            >
+              🔍 API-Verbindung testen
+            </button>
+          </div>
+
+          <!-- Generation Tab -->
+          <div class="tab-content" id="tab-generation">
+            <div class="form-group">
+              <label>Schreibstil</label>
+              <select id="styleSelect">
+                <option value="formal">📰 Seriös / Formell</option>
+                <option value="casual">💬 Modern / Locker</option>
+                <option value="tabloid">📢 Boulevard / Reißerisch</option>
+                <option value="scientific">🔬 Wissenschaftlich</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label
+                >Anzahl Artikel: <span id="articleCountValue">7</span></label
+              >
+              <input
+                type="range"
+                id="articleCount"
+                min="3"
+                max="12"
+                value="7"
+              />
+            </div>
+            <div class="form-group">
+              <label>Artikellänge</label>
+              <select id="lengthSelect">
+                <option value="short">Kurz (2 Absätze)</option>
+                <option value="medium" selected>Mittel (3-4 Absätze)</option>
+                <option value="long">Lang (5-6 Absätze)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Display Tab -->
+          <div class="tab-content" id="tab-display">
+            <div class="toggle-group">
+              <div class="toggle-label">
+                <span>🌙 Dark Mode</span>
+                <span>Dunkles Farbschema aktivieren</span>
+              </div>
+              <label class="toggle-switch">
+                <input type="checkbox" id="darkModeToggle" />
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+            <div class="toggle-group">
+              <div class="toggle-label">
+                <span>🔔 Benachrichtigungen</span>
+                <span>Toast-Meldungen anzeigen</span>
+              </div>
+              <label class="toggle-switch">
+                <input type="checkbox" id="notificationsToggle" checked />
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+            <div class="toggle-group">
+              <div class="toggle-label">
+                <span>✨ Animationen</span>
+                <span>UI-Animationen aktivieren</span>
+              </div>
+              <label class="toggle-switch">
+                <input type="checkbox" id="animationsToggle" checked />
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" id="resetSettings">
+            🔄 Zurücksetzen
+          </button>
+          <button class="btn btn-primary" id="saveSettings">
+            💾 Speichern
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Article Modal -->
+    <div class="modal" id="articleModal">
+      <div class="modal-content article-modal-content">
+        <div class="modal-header">
+          <span class="category" id="modalCategory">Kategorie</span>
+          <button class="close-btn" id="closeArticle">×</button>
+        </div>
+        <div class="modal-body">
+          <div class="article-modal-image" id="modalImage">📰</div>
+          <h1 class="article-modal-title" id="modalTitle">Artikel Titel</h1>
+          <div class="article-modal-meta">
+            <span>👤 AI Redakteur</span>
+            <span id="modalDate">📅 Heute</span>
+            <span id="modalReadingTime">📖 5 Min. Lesezeit</span>
+          </div>
+          <div class="article-modal-content" id="modalContent">
+            <p>Artikel-Inhalt wird hier angezeigt...</p>
+          </div>
+          <div class="article-modal-footer">
+            <div class="share-section">
+              <h4>Artikel teilen</h4>
+              <div class="share-buttons">
+                <button class="share-btn">📋 Kopieren</button>
+                <button class="share-btn">🐦 Twitter</button>
+                <button class="share-btn">📘 Facebook</button>
+                <button class="share-btn">💼 LinkedIn</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+      <div class="loading-content">
+        <div class="loading-animation">
+          <div class="loading-circle"></div>
+          <div class="loading-circle"></div>
+          <div class="loading-circle"></div>
+        </div>
+        <p class="loading-text">KI generiert Ihre News...</p>
+        <p class="loading-subtext" id="loadingStatus">Verbinde mit OpenAI...</p>
+        <div class="loading-progress">
+          <div class="loading-progress-bar" id="loadingProgress"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script>
+      // ================================
+      // State Management
+      // ================================
+      const state = {
+        apiKey: "",
+        model: "gpt-4",
+        style: "formal",
+        articleCount: 7,
+        articleLength: "medium",
+        darkMode: false,
+        showNotifications: true,
+        showAnimations: true,
+        articles: [],
+        bookmarks: new Set(),
+        topicsHistory: [],
+        isGenerating: false,
+        generationTime: 0,
+      };
+
+      const surpriseTopics = [
+        "Quantencomputer Durchbruch",
+        "Mars Kolonisierung",
+        "Autonomes Fahren",
+        "Erneuerbare Energien Revolution",
+        "KI in der Medizin",
+        "Virtuelle Realität im Alltag",
+        "Blockchain und Web3",
+        "Biotechnologie Fortschritte",
+        "Smart Cities der Zukunft",
+        "Nachhaltigkeit im Business",
+      ];
+
+      // ================================
+      // Initialize
+      // ================================
+      function init() {
+        setCurrentDate();
+        bindEvents();
+        applyTheme();
+        updateStats();
+      }
+
+      function setCurrentDate() {
+        const options = {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        };
+        document.getElementById("currentDate").textContent =
+          new Date().toLocaleDateString("de-DE", options);
+      }
+
+      // ================================
+      // Event Bindings
+      // ================================
+      function bindEvents() {
+        // Theme Toggle
+        document
+          .getElementById("themeToggle")
+          .addEventListener("click", toggleTheme);
+        document
+          .getElementById("darkModeToggle")
+          .addEventListener("change", (e) => {
+            state.darkMode = e.target.checked;
+            applyTheme();
+          });
+
+        // Settings Modal
+        document
+          .getElementById("settingsBtn")
+          .addEventListener("click", () => openModal("settingsModal"));
+        document
+          .getElementById("closeSettings")
+          .addEventListener("click", () => closeModal("settingsModal"));
+
+        // Tabs
+        document.querySelectorAll(".tab").forEach((tab) => {
+          tab.addEventListener("click", () => switchTab(tab.dataset.tab));
+        });
+
+        // API Key
+        document
+          .getElementById("toggleApiKey")
+          .addEventListener("click", () => {
+            const input = document.getElementById("apiKey");
+            input.type = input.type === "password" ? "text" : "password";
+          });
+        document
+          .getElementById("testApiBtn")
+          .addEventListener("click", testApiConnection);
+
+        // Settings Controls
+        document
+          .getElementById("articleCount")
+          .addEventListener("input", (e) => {
+            document.getElementById("articleCountValue").textContent =
+              e.target.value;
+          });
+        document
+          .getElementById("saveSettings")
+          .addEventListener("click", saveSettings);
+        document
+          .getElementById("resetSettings")
+          .addEventListener("click", resetSettings);
+
+        // Generate News
+        document
+          .getElementById("generateBtn")
+          .addEventListener("click", generateNews);
+        document
+          .getElementById("topicInput")
+          .addEventListener("keypress", (e) => {
+            if (e.key === "Enter") generateNews();
+          });
+
+        // Surprise Button
+        document.getElementById("surpriseBtn").addEventListener("click", () => {
+          const topic =
+            surpriseTopics[Math.floor(Math.random() * surpriseTopics.length)];
+          document.getElementById("topicInput").value = topic;
+          showToast("🎲 Zufälliges Thema", topic, "info");
+        });
+
+        // Quick Topics
+        document.querySelectorAll(".quick-topic").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            document.getElementById("topicInput").value = btn.dataset.topic;
+            generateNews();
+          });
+        });
+
+        // View Toggle
+        document.querySelectorAll(".view-btn").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            document
+              .querySelectorAll(".view-btn")
+              .forEach((b) => b.classList.remove("active"));
+            btn.classList.add("active");
+            const grid = document.getElementById("articlesGrid");
+            grid.classList.toggle("list-view", btn.dataset.view === "list");
+          });
+        });
+
+        // Article Titles
+        document.querySelectorAll(".article-title").forEach((title) => {
+          title.addEventListener("click", () => {
+            const index = parseInt(title.dataset.index);
+            openArticle(index);
+          });
+        });
+
+        // Bookmark Buttons
+        document.querySelectorAll(".bookmark-btn").forEach((btn) => {
+          btn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            toggleBookmark(parseInt(btn.dataset.index));
+            btn.classList.toggle("active");
+          });
+        });
+
+        // Article Modal
+        document
+          .getElementById("closeArticle")
+          .addEventListener("click", () => closeModal("articleModal"));
+
+        // Close modals on outside click
+        document.querySelectorAll(".modal").forEach((modal) => {
+          modal.addEventListener("click", (e) => {
+            if (e.target === modal) closeModal(modal.id);
+          });
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") {
+            document
+              .querySelectorAll(".modal.active")
+              .forEach((modal) => closeModal(modal.id));
+          }
+          if (e.key === "d" && e.ctrlKey) {
+            e.preventDefault();
+            toggleTheme();
+          }
+        });
+      }
+
+      // ================================
+      // Theme Functions
+      // ================================
+      function toggleTheme() {
+        state.darkMode = !state.darkMode;
+        document.getElementById("darkModeToggle").checked = state.darkMode;
+        applyTheme();
+      }
+
+      function applyTheme() {
+        document.body.dataset.theme = state.darkMode ? "dark" : "light";
+        document.getElementById("themeToggle").textContent = state.darkMode
+          ? "☀️"
+          : "🌙";
+      }
+
+      // ================================
+      // Modal & Tab Functions
+      // ================================
+      function openModal(modalId) {
+        document.getElementById(modalId).classList.add("active");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeModal(modalId) {
+        document.getElementById(modalId).classList.remove("active");
+        document.body.style.overflow = "";
+      }
+
+      function switchTab(tabId) {
+        document
+          .querySelectorAll(".tab")
+          .forEach((t) => t.classList.remove("active"));
+        document
+          .querySelectorAll(".tab-content")
+          .forEach((c) => c.classList.remove("active"));
+        document
+          .querySelector(`.tab[data-tab="${tabId}"]`)
+          .classList.add("active");
+        document.getElementById(`tab-${tabId}`).classList.add("active");
+      }
+
+      // ================================
+      // Settings Functions
+      // ================================
+      function saveSettings() {
+        state.apiKey = document.getElementById("apiKey").value.trim();
+        state.model = document.getElementById("modelSelect").value;
+        state.style = document.getElementById("styleSelect").value;
+        state.articleCount = parseInt(
+          document.getElementById("articleCount").value
+        );
+        state.articleLength = document.getElementById("lengthSelect").value;
+        state.showNotifications = document.getElementById(
+          "notificationsToggle"
+        ).checked;
+        state.showAnimations =
+          document.getElementById("animationsToggle").checked;
+
+        showToast(
+          "✅ Gespeichert",
+          "Einstellungen wurden übernommen",
+          "success"
+        );
+        closeModal("settingsModal");
+      }
+
+      function resetSettings() {
+        document.getElementById("modelSelect").value = "gpt-4";
+        document.getElementById("styleSelect").value = "formal";
+        document.getElementById("articleCount").value = 7;
+        document.getElementById("articleCountValue").textContent = "7";
+        document.getElementById("lengthSelect").value = "medium";
+        showToast(
+          "🔄 Zurückgesetzt",
+          "Standardeinstellungen wiederhergestellt",
+          "info"
+        );
+      }
+
+      async function testApiConnection() {
+        const apiKey = document.getElementById("apiKey").value.trim();
+        if (!apiKey) {
+          showToast("⚠️ Fehler", "Bitte API-Key eingeben", "warning");
+          return;
+        }
+
+        const btn = document.getElementById("testApiBtn");
+        btn.disabled = true;
+        btn.textContent = "⏳ Teste...";
+
+        try {
+          const response = await fetch("https://api.openai.com/v1/models", {
+            headers: { Authorization: `Bearer ${apiKey}` },
+          });
+
+          if (response.ok) {
+            showToast("✅ Erfolg", "API-Verbindung hergestellt", "success");
+          } else {
+            throw new Error("Invalid key");
+          }
+        } catch (error) {
+          showToast("❌ Fehler", "API-Key ungültig", "error");
+        }
+
+        btn.disabled = false;
+        btn.textContent = "🔍 API-Verbindung testen";
+      }
+
+      // ================================
+      // News Generation
+      // ================================
+      async function generateNews() {
+        const topic = document.getElementById("topicInput").value.trim();
+
+        if (!topic) {
+          showToast("⚠️ Thema fehlt", "Bitte ein Thema eingeben", "warning");
+          return;
+        }
+
+        if (!state.apiKey) {
+          showToast(
+            "🔑 API-Key fehlt",
+            "Bitte in Einstellungen konfigurieren",
+            "warning"
+          );
+          openModal("settingsModal");
+          return;
+        }
+
+        if (state.isGenerating) return;
+
+        state.isGenerating = true;
+        const startTime = Date.now();
+        showLoading(true);
+
+        try {
+          updateLoadingStatus("Analysiere Thema...", 10);
+          await delay(300);
+
+          updateLoadingStatus("Generiere Artikel...", 30);
+          const articles = await callOpenAI(topic);
+
+          updateLoadingStatus("Formatiere Inhalte...", 70);
+          await delay(200);
+
+          displayArticles(articles);
+
+          updateLoadingStatus("Abgeschlossen!", 100);
+          await delay(300);
+
+          state.generationTime = ((Date.now() - startTime) / 1000).toFixed(1);
+          state.topicsHistory.push(topic);
+          updateStats();
+
+          showToast(
+            "✅ Fertig!",
+            `${articles.length} Artikel generiert`,
+            "success"
+          );
+        } catch (error) {
+          console.error(error);
+          showToast("❌ Fehler", error.message, "error");
+        }
+
+        state.isGenerating = false;
+        showLoading(false);
+      }
+
+      async function callOpenAI(topic) {
+        const lengthInstructions = {
+          short: "2 kurze Absätze",
+          medium: "3-4 Absätze",
+          long: "5-6 detaillierte Absätze",
+        };
+
+        const styleInstructions = {
+          formal: "seriösen, formellen Nachrichtenstil",
+          casual: "modernen, lockeren aber informativen Stil",
+          tabloid: "reißerischen Boulevard-Stil",
+          scientific: "wissenschaftlich-präzisen Stil",
+        };
+
+        const prompt = `Generiere ${
+          state.articleCount
+        } Nachrichtenartikel zum Thema "${topic}".
+
+Stil: ${styleInstructions[state.style]}
+Länge: ${lengthInstructions[state.articleLength]}
+
+Antworte NUR mit JSON:
+{
+    "articles": [
+        {
+            "title": "Überschrift (max 80 Zeichen)",
+            "teaser": "Teaser (max 120 Zeichen)",
+            "content": "Artikeltext",
+            "category": "Kategorie",
+            "emoji": "passendes Emoji",
+            "tags": ["tag1", "tag2"]
+        }
+    ],
+    "breakingNews": "Eilmeldung (max 80 Zeichen)"
+}`;
+
+        const response = await fetch(
+          "https://api.openai.com/v1/chat/completions",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${state.apiKey}`,
+            },
+            body: JSON.stringify({
+              model: state.model,
+              messages: [
+                {
+                  role: "system",
+                  content:
+                    "Du bist ein Nachrichtenredakteur. Antworte nur mit JSON.",
+                },
+                { role: "user", content: prompt },
+              ],
+              temperature: 0.8,
+              max_tokens: 4000,
+            }),
+          }
+        );
+
+        if (!response.ok) {
+          const error = await response.json();
+          throw new Error(error.error?.message || "API-Fehler");
+        }
+
+        const data = await response.json();
+        const content = data.choices[0].message.content;
+
+        const jsonMatch = content.match(/\{[\s\S]*\}/);
+        if (jsonMatch) {
+          const parsed = JSON.parse(jsonMatch[0]);
+          state.articles = parsed.articles;
+          if (parsed.breakingNews) {
+            document.getElementById("breakingText").textContent =
+              parsed.breakingNews;
+          }
+          return parsed.articles;
+        }
+
+        throw new Error("Ungültige Antwort");
+      }
+
+      function displayArticles(articles) {
+        // Hero Article
+        if (articles[0]) updateArticle("heroArticle", articles[0], true);
+
+        // Grid Articles
+        for (let i = 1; i < Math.min(articles.length, 7); i++) {
+          updateArticle(`article${i}`, articles[i]);
+        }
+
+        // Trending
+        updateTrending(articles);
+
+        // Tags
+        updateTags(articles);
+
+        // Show stats bar
+        document.getElementById("statsBar").style.display = "block";
+        document.getElementById("statArticles").textContent = articles.length;
+        document.getElementById("statTime").textContent = state.generationTime;
+        document.getElementById("statModel").textContent =
+          state.model.toUpperCase();
+      }
+
+      function updateArticle(id, article, featured = false) {
+        const el = document.getElementById(id);
+        if (!el || !article) return;
+
+        el.classList.add("generated");
+
+        const title = el.querySelector(".article-title");
+        const teaser = el.querySelector(".article-teaser");
+        const category = el.querySelector(".category");
+        const badge = el.querySelector(".article-badge");
+        const placeholder = el.querySelector(".image-placeholder");
+
+        if (title) title.textContent = article.title;
+        if (teaser) teaser.textContent = article.teaser;
+        if (category) category.textContent = article.category;
+        if (badge) badge.textContent = article.category;
+        if (placeholder) placeholder.textContent = article.emoji || "📰";
+
+        // Reading time
+        const readingTime = el.querySelector(".reading-time");
+        if (readingTime) {
+          const words = article.content.split(" ").length;
+          readingTime.textContent = `📖 ${Math.max(
+            1,
+            Math.ceil(words / 200)
+          )} Min.`;
+        }
+      }
+
+      function updateTrending(articles) {
+        const items = document.querySelectorAll(".trending-item");
+        articles.slice(0, 4).forEach((article, i) => {
+          if (items[i]) {
+            const title = items[i].querySelector(".trend-title");
+            if (title) title.textContent = article.title;
+          }
+        });
+      }
+
+      function updateTags(articles) {
+        const allTags = new Set();
+        articles.forEach((a) => {
+          if (a.tags) a.tags.forEach((t) => allTags.add(t));
+          allTags.add(a.category);
+        });
+
+        const cloud = document.getElementById("tagsCloud");
+        cloud.innerHTML = Array.from(allTags)
+          .slice(0, 8)
+          .map((tag) => `<span class="tag">${tag}</span>`)
+          .join("");
+      }
+
+      // ================================
+      // Article Modal
+      // ================================
+      function openArticle(index) {
+        const article = state.articles[index];
+        if (!article) {
+          showToast("ℹ️ Info", "Bitte erst Artikel generieren", "info");
+          return;
+        }
+
+        document.getElementById("modalCategory").textContent = article.category;
+        document.getElementById("modalTitle").textContent = article.title;
+        document.getElementById("modalImage").textContent =
+          article.emoji || "📰";
+        document.getElementById(
+          "modalDate"
+        ).textContent = `📅 ${new Date().toLocaleDateString("de-DE")}`;
+
+        const words = article.content.split(" ").length;
+        document.getElementById(
+          "modalReadingTime"
+        ).textContent = `📖 ${Math.max(1, Math.ceil(words / 200))} Min.`;
+
+        const contentHtml = article.content
+          .split("\n\n")
+          .filter((p) => p.trim())
+          .map((p) => `<p>${p}</p>`)
+          .join("");
+
+        document.getElementById("modalContent").innerHTML =
+          contentHtml || `<p>${article.content}</p>`;
+
+        openModal("articleModal");
+      }
+
+      // ================================
+      // Stats & Bookmarks
+      // ================================
+      function toggleBookmark(index) {
+        if (state.bookmarks.has(index)) {
+          state.bookmarks.delete(index);
+        } else {
+          state.bookmarks.add(index);
+        }
+        updateStats();
+      }
+
+      function updateStats() {
+        const wordCount = state.articles.reduce(
+          (sum, a) => sum + (a.content?.split(" ").length || 0),
+          0
+        );
+
+        document.getElementById("widgetArticleCount").textContent =
+          state.articles.length;
+        document.getElementById("widgetWordCount").textContent = wordCount;
+        document.getElementById("widgetBookmarks").textContent =
+          state.bookmarks.size;
+        document.getElementById("widgetTopics").textContent =
+          state.topicsHistory.length;
+      }
+
+      // ================================
+      // UI Helpers
+      // ================================
+      function showLoading(show) {
+        const overlay = document.getElementById("loadingOverlay");
+        const btn = document.getElementById("generateBtn");
+
+        if (show) {
+          overlay.classList.add("active");
+          btn.disabled = true;
+          btn.querySelector(".btn-text").style.display = "none";
+          btn.querySelector(".btn-loading").style.display = "inline";
+        } else {
+          overlay.classList.remove("active");
+          btn.disabled = false;
+          btn.querySelector(".btn-text").style.display = "inline";
+          btn.querySelector(".btn-loading").style.display = "none";
+        }
+      }
+
+      function updateLoadingStatus(text, progress) {
+        document.getElementById("loadingStatus").textContent = text;
+        document.getElementById("loadingProgress").style.width = `${progress}%`;
+      }
+
+      function showToast(title, message, type = "info") {
+        if (!state.showNotifications) return;
+
+        const icons = { success: "✅", error: "❌", warning: "⚠️", info: "ℹ️" };
+        const toast = document.createElement("div");
+        toast.className = `toast ${type}`;
+        toast.innerHTML = `
+                <span class="toast-icon">${icons[type]}</span>
+                <div class="toast-content">
+                    <div class="toast-title">${title}</div>
+                    <div class="toast-message">${message}</div>
+                </div>
+                <button class="toast-close" onclick="this.parentElement.remove()">×</button>
+            `;
+
+        document.getElementById("toastContainer").appendChild(toast);
+
+        setTimeout(() => {
+          toast.style.opacity = "0";
+          toast.style.transform = "translateX(100%)";
+          setTimeout(() => toast.remove(), 300);
+        }, 4000);
+      }
+
+      function delay(ms) {
+        return new Promise((resolve) => setTimeout(resolve, ms));
+      }
+
+      // ================================
+      // Start
+      // ================================
+      init();
+    </script>
+  </body>
+</html>
