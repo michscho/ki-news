@@ -1431,8 +1431,8 @@
         padding: 25px 30px;
         background: linear-gradient(
           135deg,
-          var(--accent-color)10,
-          var(--accent-color)05
+          var(--accent-color) 10,
+          var(--accent-color) 05
         );
         border-left: 4px solid var(--accent-color);
         border-radius: 0 var(--radius-md) var(--radius-md) 0;
@@ -1956,7 +1956,9 @@
                 <article class="article-card interview" id="article1">
                   <div class="article-image">
                     <span class="article-badge">Interview</span>
-                    <span class="article-type-badge interview">🎤 Interview</span>
+                    <span class="article-type-badge interview"
+                      >🎤 Interview</span
+                    >
                     <button class="bookmark-btn" data-index="1">🔖</button>
                     <div class="image-placeholder">🎙️</div>
                   </div>
@@ -2066,7 +2068,9 @@
                 <article class="article-card interview" id="article6">
                   <div class="article-image">
                     <span class="article-badge">Interview</span>
-                    <span class="article-type-badge interview">🎤 Interview</span>
+                    <span class="article-type-badge interview"
+                      >🎤 Interview</span
+                    >
                     <button class="bookmark-btn" data-index="6">🔖</button>
                     <div class="image-placeholder">👤</div>
                   </div>
@@ -2269,12 +2273,12 @@
             <div class="form-group">
               <label>Modell</label>
               <select id="modelSelect">
-                <option value="gpt-3.5-turbo">
-                  GPT-3.5 Turbo (Schnell & Günstig)
+                <option value="gpt-4-turbo">
+                  GPT-4 Turbo (Max Token: 128.000, Sehr gut, Mittel)
                 </option>
                 <option value="gpt-4" selected>GPT-4 (Beste Qualität)</option>
-                <option value="gpt-4-turbo-preview">
-                  GPT-4 Turbo (Neueste Version)
+                <option value="gpt-4o">
+                  GPT-4o (Max Token: 128.000, Beste, Mittel)
                 </option>
               </select>
             </div>
@@ -2932,19 +2936,43 @@
         if (state.includeAnalyses) typesToInclude.push("analysis");
         if (state.includeOpinions) typesToInclude.push("opinion");
 
-        const prompt = `Generiere ${state.articleCount} diverse und ausführliche Nachrichtenartikel zum Thema "${topic}".
+        const prompt = `Generiere ${
+          state.articleCount
+        } diverse und ausführliche Nachrichtenartikel zum Thema "${topic}".
 
 WICHTIG - ARTIKELTYPEN (verwende diese Vielfalt):
-${typesToInclude.includes("report") ? '- "report": Klassischer Nachrichtenbericht mit Fakten und Hintergründen' : ""}
-${typesToInclude.includes("interview") ? '- "interview": Fiktives Interview mit einem Experten (mit Fragen und Antworten im Dialog-Format)' : ""}
-${typesToInclude.includes("analysis") ? '- "analysis": Tiefgehende Analyse mit Einordnung und Prognosen' : ""}
-${typesToInclude.includes("opinion") ? '- "opinion": Meinungsbeitrag/Kommentar mit klarer Haltung' : ""}
+${
+  typesToInclude.includes("report")
+    ? '- "report": Klassischer Nachrichtenbericht mit Fakten und Hintergründen'
+    : ""
+}
+${
+  typesToInclude.includes("interview")
+    ? '- "interview": Fiktives Interview mit einem Experten (mit Fragen und Antworten im Dialog-Format)'
+    : ""
+}
+${
+  typesToInclude.includes("analysis")
+    ? '- "analysis": Tiefgehende Analyse mit Einordnung und Prognosen'
+    : ""
+}
+${
+  typesToInclude.includes("opinion")
+    ? '- "opinion": Meinungsbeitrag/Kommentar mit klarer Haltung'
+    : ""
+}
 
 STIL: ${styleInstructions[state.style]}
 LÄNGE: ${lengthInstructions[state.articleLength]}
 
 WICHTIGE ANFORDERUNGEN:
-1. Jeder Artikel muss SEHR ausführlich sein (${state.articleLength === "extended" ? "800+" : state.articleLength === "long" ? "500+" : "300+"} Wörter)
+1. Jeder Artikel muss SEHR ausführlich sein (${
+          state.articleLength === "extended"
+            ? "800+"
+            : state.articleLength === "long"
+            ? "500+"
+            : "300+"
+        } Wörter)
 2. Bei INTERVIEWS: Verwende ein echtes Frage-Antwort-Format mit mindestens 5-7 Fragen
 3. Erstelle fiktive aber realistische Expertennamen und Positionen
 4. Füge Zwischenüberschriften ein (mit ### markiert)
@@ -3002,7 +3030,7 @@ Antworte NUR mit diesem JSON-Format:
                 { role: "user", content: prompt },
               ],
               temperature: 0.85,
-              max_tokens: 8000,
+              max_tokens: 128000,
             }),
           }
         );
@@ -3103,24 +3131,36 @@ Antworte NUR mit diesem JSON-Format:
         if (state.useUnsplash && article.imageUrl) {
           imageContainer.innerHTML = `
                     <span class="article-badge ai">🤖 KI-Generiert</span>
-                    <span class="article-type-badge ${article.type}">${getArticleTypeInfo(article.type).icon} ${getArticleTypeInfo(article.type).label}</span>
+                    <span class="article-type-badge ${article.type}">${
+            getArticleTypeInfo(article.type).icon
+          } ${getArticleTypeInfo(article.type).label}</span>
                     <button class="bookmark-btn" data-index="0">🔖</button>
-                    <img src="${article.imageUrl}" alt="${article.title}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="image-placeholder" style="display:none;">${article.emoji || "📰"}</div>
+                    <img src="${article.imageUrl}" alt="${
+            article.title
+          }" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="image-placeholder" style="display:none;">${
+                      article.emoji || "📰"
+                    }</div>
                     <span class="image-credit">📷 Unsplash</span>
                 `;
         } else {
           imageContainer.innerHTML = `
                     <span class="article-badge ai">🤖 KI-Generiert</span>
-                    <span class="article-type-badge ${article.type}">${getArticleTypeInfo(article.type).icon} ${getArticleTypeInfo(article.type).label}</span>
+                    <span class="article-type-badge ${article.type}">${
+            getArticleTypeInfo(article.type).icon
+          } ${getArticleTypeInfo(article.type).label}</span>
                     <button class="bookmark-btn" data-index="0">🔖</button>
-                    <div class="image-placeholder">${article.emoji || "📰"}</div>
+                    <div class="image-placeholder">${
+                      article.emoji || "📰"
+                    }</div>
                 `;
         }
 
         // Update content
         el.querySelector(".category").textContent = article.category;
-        el.querySelector(".article-type").textContent = `${getArticleTypeInfo(article.type).icon} ${getArticleTypeInfo(article.type).label}`;
+        el.querySelector(".article-type").textContent = `${
+          getArticleTypeInfo(article.type).icon
+        } ${getArticleTypeInfo(article.type).label}`;
 
         const title = el.querySelector(".article-title");
         title.textContent = article.title;
@@ -3131,7 +3171,10 @@ Antworte NUR mit diesem JSON-Format:
 
         // Update reading time
         const words = article.content.split(" ").length;
-        el.querySelector(".reading-time").textContent = `📖 ${Math.max(1, Math.ceil(words / 200))} Min.`;
+        el.querySelector(".reading-time").textContent = `📖 ${Math.max(
+          1,
+          Math.ceil(words / 200)
+        )} Min.`;
 
         el.querySelector(".article-meta").innerHTML = `
                 <span>👤 ${article.author || "AI Redakteur"}</span>
@@ -3152,7 +3195,9 @@ Antworte NUR mit diesem JSON-Format:
         if (article.type === "interview" && article.interviewee) {
           previewContent = `
                     <div class="interview-preview">
-                        <span class="speaker">${article.interviewee.name}:</span>
+                        <span class="speaker">${
+                          article.interviewee.name
+                        }:</span>
                         "${article.interviewee.quote || article.teaser}"
                     </div>
                 `;
@@ -3163,28 +3208,40 @@ Antworte NUR mit diesem JSON-Format:
         let imageHtml = "";
         if (state.useUnsplash && article.imageUrl) {
           imageHtml = `
-                    <img src="${article.imageUrl}" alt="${article.title}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="image-placeholder" style="display:none;">${article.emoji || "📰"}</div>
+                    <img src="${article.imageUrl}" alt="${
+            article.title
+          }" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="image-placeholder" style="display:none;">${
+                      article.emoji || "📰"
+                    }</div>
                     <span class="image-credit">📷 Unsplash</span>
                 `;
         } else {
-          imageHtml = `<div class="image-placeholder">${article.emoji || "📰"}</div>`;
+          imageHtml = `<div class="image-placeholder">${
+            article.emoji || "📰"
+          }</div>`;
         }
 
         card.innerHTML = `
                 <div class="article-image">
                     <span class="article-badge">${article.category}</span>
-                    <span class="article-type-badge ${article.type}">${typeInfo.icon} ${typeInfo.label}</span>
+                    <span class="article-type-badge ${article.type}">${
+          typeInfo.icon
+        } ${typeInfo.label}</span>
                     <button class="bookmark-btn" data-index="${index}">🔖</button>
                     ${imageHtml}
                 </div>
                 <div class="article-content">
                     <div class="article-meta-top">
                         <span class="category">${article.category}</span>
-                        <span class="article-type">${typeInfo.icon} ${typeInfo.label}</span>
+                        <span class="article-type">${typeInfo.icon} ${
+          typeInfo.label
+        }</span>
                         <span class="reading-time">📖 ${readingTime} Min.</span>
                     </div>
-                    <h3 class="article-title" data-index="${index}">${article.title}</h3>
+                    <h3 class="article-title" data-index="${index}">${
+          article.title
+        }</h3>
                     ${previewContent}
                     <div class="article-footer">
                         <div class="article-meta">
@@ -3216,7 +3273,10 @@ Antworte NUR mit diesem JSON-Format:
           .map(
             (expert, index) => `
                 <div class="expert-card">
-                    <img src="${getUnsplashImageWithId(expert.imageQuery || "professional portrait", index + 100)}"
+                    <img src="${getUnsplashImageWithId(
+                      expert.imageQuery || "professional portrait",
+                      index + 100
+                    )}"
                          alt="${expert.name}"
                          class="expert-avatar"
                          onerror="this.src='https://via.placeholder.com/60?text=👤'">
@@ -3241,7 +3301,11 @@ Antworte NUR mit diesem JSON-Format:
                     <span class="trend-rank">${i + 1}</span>
                     <div class="trend-content">
                         <p class="trend-title">${article.title}</p>
-                        <span class="trend-meta">${getArticleTypeInfo(article.type).icon} ${getArticleTypeInfo(article.type).label} • 📈 ${Math.floor(Math.random() * 2000 + 500)} Leser</span>
+                        <span class="trend-meta">${
+                          getArticleTypeInfo(article.type).icon
+                        } ${
+              getArticleTypeInfo(article.type).label
+            } • 📈 ${Math.floor(Math.random() * 2000 + 500)} Leser</span>
                     </div>
                 </li>
             `
@@ -3306,7 +3370,10 @@ Antworte NUR mit diesem JSON-Format:
         const words = article.content.split(" ").length;
         document.getElementById(
           "modalReadingTime"
-        ).textContent = `📖 ${Math.max(1, Math.ceil(words / 200))} Min. Lesezeit`;
+        ).textContent = `📖 ${Math.max(
+          1,
+          Math.ceil(words / 200)
+        )} Min. Lesezeit`;
 
         // Set lead
         document.getElementById("modalLead").textContent =
@@ -3333,7 +3400,11 @@ Antworte NUR mit diesem JSON-Format:
         if (article.type === "interview" && article.interviewee) {
           html += `
                     <div class="interviewee-info">
-                        <img src="${getUnsplashImageWithId(article.interviewee.imageQuery || "professional portrait business", Date.now())}"
+                        <img src="${getUnsplashImageWithId(
+                          article.interviewee.imageQuery ||
+                            "professional portrait business",
+                          Date.now()
+                        )}"
                              alt="${article.interviewee.name}"
                              class="interviewee-avatar"
                              onerror="this.src='https://via.placeholder.com/80?text=👤'">
@@ -3432,7 +3503,8 @@ Antworte NUR mit diesem JSON-Format:
         document.getElementById("widgetArticleCount").textContent =
           state.articles.length;
         document.getElementById("widgetWordCount").textContent = wordCount;
-        document.getElementById("widgetInterviews").textContent = interviewCount;
+        document.getElementById("widgetInterviews").textContent =
+          interviewCount;
         document.getElementById("widgetAnalyses").textContent = analysisCount;
       }
 
