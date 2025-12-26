@@ -367,45 +367,46 @@
 
       .content-grid {
         display: grid;
-        grid-template-columns: 1fr 300px;
+        grid-template-columns: 1fr 350px;
         gap: 25px;
       }
 
-      /* Skeleton Loading */
-      .skeleton {
-        background: linear-gradient(
-          90deg,
-          var(--bg-tertiary) 25%,
-          var(--bg-secondary) 50%,
-          var(--bg-tertiary) 75%
-        );
-        background-size: 200% 100%;
-        animation: skeleton-loading 1.5s infinite;
-        border-radius: var(--radius-sm);
+      /* Article Type Badges */
+      .article-type-badge {
+        position: absolute;
+        top: 15px;
+        right: 60px;
+        padding: 4px 10px;
+        border-radius: 15px;
+        font-size: 0.7rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        z-index: 2;
       }
 
-      @keyframes skeleton-loading {
-        0% {
-          background-position: 200% 0;
-        }
-        100% {
-          background-position: -200% 0;
-        }
+      .article-type-badge.interview {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
       }
 
-      .skeleton-title {
-        height: 28px;
-        margin-bottom: 12px;
-        width: 80%;
+      .article-type-badge.analysis {
+        background: linear-gradient(135deg, #f093fb, #f5576c);
+        color: white;
       }
 
-      .skeleton-text {
-        height: 16px;
-        margin-bottom: 8px;
+      .article-type-badge.report {
+        background: linear-gradient(135deg, #4facfe, #00f2fe);
+        color: white;
       }
 
-      .skeleton-text:last-child {
-        width: 60%;
+      .article-type-badge.opinion {
+        background: linear-gradient(135deg, #43e97b, #38f9d7);
+        color: #1a1a2e;
+      }
+
+      .article-type-badge.breaking {
+        background: linear-gradient(135deg, #fa709a, #fee140);
+        color: #1a1a2e;
       }
 
       /* Article Cards */
@@ -427,6 +428,22 @@
         grid-column: span 2;
       }
 
+      .article-card.interview {
+        border-left: 4px solid #667eea;
+      }
+
+      .article-card.analysis {
+        border-left: 4px solid #f5576c;
+      }
+
+      .article-card.report {
+        border-left: 4px solid #4facfe;
+      }
+
+      .article-card.opinion {
+        border-left: 4px solid #43e97b;
+      }
+
       .article-image {
         height: 250px;
         background: linear-gradient(
@@ -439,7 +456,7 @@
       }
 
       .article-card.featured .article-image {
-        height: 350px;
+        height: 400px;
       }
 
       .article-image img {
@@ -461,6 +478,17 @@
         justify-content: center;
         color: var(--text-light);
         font-size: 3rem;
+      }
+
+      .image-credit {
+        position: absolute;
+        bottom: 8px;
+        right: 8px;
+        background: rgba(0, 0, 0, 0.6);
+        color: white;
+        font-size: 0.65rem;
+        padding: 2px 6px;
+        border-radius: 3px;
       }
 
       .article-badge {
@@ -530,6 +558,15 @@
         border-radius: var(--radius-sm);
       }
 
+      .article-type {
+        background: var(--bg-tertiary);
+        color: var(--text-secondary);
+        padding: 3px 10px;
+        font-size: 0.7rem;
+        font-weight: 600;
+        border-radius: var(--radius-sm);
+      }
+
       .reading-time {
         color: var(--text-light);
         font-size: 0.8rem;
@@ -553,7 +590,7 @@
       }
 
       .article-card.featured .article-title {
-        font-size: 1.8rem;
+        font-size: 2rem;
       }
 
       .article-teaser {
@@ -600,6 +637,25 @@
       .action-btn:hover {
         background: var(--accent-color);
         color: white;
+      }
+
+      /* Interview Quote Style */
+      .interview-preview {
+        background: var(--bg-tertiary);
+        border-left: 3px solid #667eea;
+        padding: 12px 15px;
+        margin: 10px 0;
+        font-style: italic;
+        color: var(--text-secondary);
+        border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      }
+
+      .interview-preview .speaker {
+        font-weight: 600;
+        color: var(--text-primary);
+        font-style: normal;
+        display: block;
+        margin-bottom: 5px;
       }
 
       /* Articles Grid */
@@ -651,7 +707,7 @@
 
       .articles-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
         gap: 20px;
       }
 
@@ -661,12 +717,12 @@
 
       .articles-grid.list-view .article-card {
         display: grid;
-        grid-template-columns: 250px 1fr;
+        grid-template-columns: 300px 1fr;
       }
 
       .articles-grid.list-view .article-image {
         height: 100%;
-        min-height: 180px;
+        min-height: 200px;
       }
 
       /* Sidebar */
@@ -692,6 +748,47 @@
         display: flex;
         align-items: center;
         gap: 8px;
+      }
+
+      /* Expert Widget */
+      .expert-card {
+        display: flex;
+        gap: 15px;
+        padding: 15px 0;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .expert-card:last-child {
+        border-bottom: none;
+      }
+
+      .expert-avatar {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        object-fit: cover;
+        background: var(--bg-tertiary);
+      }
+
+      .expert-info {
+        flex: 1;
+      }
+
+      .expert-name {
+        font-weight: 600;
+        margin-bottom: 2px;
+      }
+
+      .expert-role {
+        font-size: 0.8rem;
+        color: var(--text-light);
+        margin-bottom: 5px;
+      }
+
+      .expert-quote {
+        font-size: 0.85rem;
+        font-style: italic;
+        color: var(--text-secondary);
       }
 
       /* Trending Widget */
@@ -813,41 +910,6 @@
         color: white;
       }
 
-      /* Newsletter Widget */
-      .newsletter-form {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-      }
-
-      .newsletter-form input {
-        padding: 12px;
-        border: 2px solid var(--border-color);
-        border-radius: var(--radius-sm);
-        font-size: 0.9rem;
-        transition: var(--transition);
-      }
-
-      .newsletter-form input:focus {
-        border-color: var(--accent-color);
-        outline: none;
-      }
-
-      .newsletter-form button {
-        background: var(--accent-color);
-        color: white;
-        border: none;
-        padding: 12px;
-        border-radius: var(--radius-sm);
-        font-weight: 600;
-        cursor: pointer;
-        transition: var(--transition);
-      }
-
-      .newsletter-form button:hover {
-        background: var(--accent-hover);
-      }
-
       /* Footer */
       .main-footer {
         background: var(--primary-color);
@@ -936,7 +998,7 @@
         height: 100%;
         background: rgba(0, 0, 0, 0.7);
         z-index: 1000;
-        align-items: center;
+        align-items: flex-start;
         justify-content: center;
         padding: 20px;
         overflow-y: auto;
@@ -952,13 +1014,12 @@
         border-radius: var(--radius-lg);
         max-width: 600px;
         width: 100%;
-        max-height: 90vh;
-        overflow-y: auto;
+        margin: 40px 0;
         animation: modalSlide 0.3s ease;
       }
 
       .article-modal-content {
-        max-width: 800px;
+        max-width: 900px;
       }
 
       @keyframes modalSlide {
@@ -982,6 +1043,7 @@
         top: 0;
         background: var(--bg-primary);
         z-index: 10;
+        border-radius: var(--radius-lg) var(--radius-lg) 0 0;
       }
 
       .modal-header h2 {
@@ -1219,64 +1281,231 @@
         background: var(--bg-secondary);
       }
 
-      /* Article Modal */
-      .article-modal-image {
+      /* Article Modal - Extended Styles */
+      .article-modal-hero {
         width: 100%;
-        height: 300px;
-        background: linear-gradient(135deg, #667eea, #764ba2);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 5rem;
-        margin-bottom: 20px;
-        border-radius: var(--radius-md);
+        height: 400px;
+        position: relative;
+        overflow: hidden;
+        border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+      }
+
+      .article-modal-hero img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .article-modal-hero-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 40px 30px 30px;
+        background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+        color: white;
+      }
+
+      .article-modal-type {
+        display: inline-block;
+        padding: 5px 12px;
+        border-radius: 15px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        margin-bottom: 10px;
+        text-transform: uppercase;
       }
 
       .article-modal-title {
         font-family: "Playfair Display", serif;
-        font-size: 1.8rem;
-        line-height: 1.3;
+        font-size: 2.2rem;
+        line-height: 1.2;
         margin-bottom: 15px;
       }
 
       .article-modal-meta {
         display: flex;
         gap: 20px;
-        color: var(--text-light);
         font-size: 0.9rem;
-        margin-bottom: 20px;
         flex-wrap: wrap;
+        opacity: 0.9;
       }
 
-      .article-modal-content {
-        line-height: 1.8;
+      .article-modal-body {
+        padding: 30px;
+      }
+
+      .article-lead {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        line-height: 1.6;
+        margin-bottom: 25px;
+        padding-bottom: 25px;
+        border-bottom: 2px solid var(--border-color);
+      }
+
+      .article-content-text {
         font-size: 1.05rem;
+        line-height: 1.9;
+        color: var(--text-secondary);
       }
 
-      .article-modal-content p {
+      .article-content-text p {
+        margin-bottom: 20px;
+      }
+
+      .article-content-text h3 {
+        font-family: "Playfair Display", serif;
+        font-size: 1.4rem;
+        color: var(--text-primary);
+        margin: 35px 0 15px;
+      }
+
+      /* Interview Styles in Modal */
+      .interview-block {
+        margin: 25px 0;
+        padding: 20px;
+        background: var(--bg-secondary);
+        border-radius: var(--radius-md);
+        border-left: 4px solid #667eea;
+      }
+
+      .interview-question {
+        font-weight: 700;
+        color: var(--text-primary);
         margin-bottom: 15px;
+        display: flex;
+        gap: 10px;
       }
 
+      .interview-question::before {
+        content: "F:";
+        color: #667eea;
+        font-weight: 700;
+      }
+
+      .interview-answer {
+        color: var(--text-secondary);
+        line-height: 1.8;
+        display: flex;
+        gap: 10px;
+      }
+
+      .interview-answer::before {
+        content: "A:";
+        color: var(--accent-color);
+        font-weight: 700;
+      }
+
+      .interviewee-info {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        padding: 20px;
+        background: linear-gradient(135deg, #667eea15, #764ba215);
+        border-radius: var(--radius-md);
+        margin-bottom: 25px;
+      }
+
+      .interviewee-avatar {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      .interviewee-details h4 {
+        font-size: 1.1rem;
+        margin-bottom: 4px;
+      }
+
+      .interviewee-details p {
+        font-size: 0.9rem;
+        color: var(--text-light);
+      }
+
+      /* Quote Block */
+      .quote-block {
+        margin: 30px 0;
+        padding: 25px 30px;
+        background: linear-gradient(
+          135deg,
+          var(--accent-color)10,
+          var(--accent-color)05
+        );
+        border-left: 4px solid var(--accent-color);
+        border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      }
+
+      .quote-block p {
+        font-size: 1.15rem;
+        font-style: italic;
+        color: var(--text-primary);
+        margin-bottom: 10px !important;
+      }
+
+      .quote-block cite {
+        font-size: 0.9rem;
+        color: var(--text-light);
+        font-style: normal;
+      }
+
+      /* Info Box */
+      .info-box {
+        margin: 25px 0;
+        padding: 20px;
+        background: var(--bg-tertiary);
+        border-radius: var(--radius-md);
+      }
+
+      .info-box-title {
+        font-weight: 700;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .info-box ul {
+        margin-left: 20px;
+      }
+
+      .info-box li {
+        margin-bottom: 8px;
+      }
+
+      /* Article Footer */
       .article-modal-footer {
-        margin-top: 25px;
-        padding-top: 20px;
+        padding: 25px 30px;
         border-top: 1px solid var(--border-color);
+        background: var(--bg-secondary);
+      }
+
+      .article-tags {
+        margin-bottom: 20px;
+      }
+
+      .article-tags h4 {
+        font-size: 0.9rem;
+        margin-bottom: 10px;
       }
 
       .share-section h4 {
-        margin-bottom: 12px;
         font-size: 0.9rem;
+        margin-bottom: 12px;
       }
 
       .share-buttons {
         display: flex;
         gap: 10px;
+        flex-wrap: wrap;
       }
 
       .share-btn {
         padding: 10px 16px;
-        background: var(--bg-secondary);
-        border: none;
+        background: var(--bg-primary);
+        border: 1px solid var(--border-color);
         border-radius: var(--radius-sm);
         cursor: pointer;
         transition: var(--transition);
@@ -1289,6 +1518,7 @@
       .share-btn:hover {
         background: var(--accent-color);
         color: white;
+        border-color: var(--accent-color);
       }
 
       /* Loading Overlay */
@@ -1411,9 +1641,11 @@
       .toast.success {
         border-left-color: #4caf50;
       }
+
       .toast.error {
         border-left-color: var(--accent-color);
       }
+
       .toast.warning {
         border-left-color: #ff9800;
       }
@@ -1474,6 +1706,10 @@
         .articles-grid.list-view .article-card {
           grid-template-columns: 1fr;
         }
+
+        .article-modal-title {
+          font-size: 1.6rem;
+        }
       }
 
       @media (max-width: 768px) {
@@ -1512,6 +1748,14 @@
         .modal-content {
           margin: 10px;
         }
+
+        .article-modal-hero {
+          height: 250px;
+        }
+
+        .article-modal-title {
+          font-size: 1.3rem;
+        }
       }
     </style>
   </head>
@@ -1531,6 +1775,7 @@
           </div>
         </div>
       </div>
+
       <div class="header-main">
         <div class="container">
           <h1 class="logo">
@@ -1541,6 +1786,7 @@
           </p>
         </div>
       </div>
+
       <nav class="main-nav">
         <div class="container">
           <ul class="nav-list">
@@ -1638,6 +1884,13 @@
               >Modell: <span class="stat-value" id="statModel">-</span></span
             >
           </div>
+          <div class="stat-item">
+            <span>📷</span>
+            <span
+              ><span class="stat-value" id="statImages">0</span> Bilder von
+              Unsplash</span
+            >
+          </div>
         </div>
       </div>
     </div>
@@ -1655,13 +1908,15 @@
               <article class="article-card featured" id="heroArticle">
                 <div class="article-image">
                   <span class="article-badge ai">🤖 KI-Generiert</span>
+                  <span class="article-type-badge report">Bericht</span>
                   <button class="bookmark-btn" data-index="0">🔖</button>
                   <div class="image-placeholder">📰</div>
                 </div>
                 <div class="article-content">
                   <div class="article-meta-top">
                     <span class="category">Aktuell</span>
-                    <span class="reading-time">📖 3 Min.</span>
+                    <span class="article-type">📋 Bericht</span>
+                    <span class="reading-time">📖 8 Min.</span>
                   </div>
                   <h2 class="article-title" data-index="0">
                     Hier erscheint die Hauptschlagzeile Ihres generierten
@@ -1670,7 +1925,8 @@
                   <p class="article-teaser">
                     Dies ist der Teaser-Text für den Hauptartikel. Geben Sie ein
                     Thema ein und konfigurieren Sie Ihren API-Key, um
-                    KI-generierte Nachrichten zu erhalten.
+                    KI-generierte Nachrichten zu erhalten. Die Artikel werden
+                    ausführlich und informativ sein.
                   </p>
                   <div class="article-footer">
                     <div class="article-meta">
@@ -1696,40 +1952,110 @@
                 </div>
               </div>
               <div class="articles-grid" id="articlesGrid">
-                <!-- Article Cards -->
-                <article class="article-card" id="article1">
+                <!-- Article Cards will be dynamically generated -->
+                <article class="article-card interview" id="article1">
                   <div class="article-image">
-                    <span class="article-badge">Politik</span>
+                    <span class="article-badge">Interview</span>
+                    <span class="article-type-badge interview">🎤 Interview</span>
                     <button class="bookmark-btn" data-index="1">🔖</button>
-                    <div class="image-placeholder">🏛️</div>
+                    <div class="image-placeholder">🎙️</div>
                   </div>
                   <div class="article-content">
                     <div class="article-meta-top">
-                      <span class="category">Politik</span>
-                      <span class="reading-time">📖 4 Min.</span>
+                      <span class="category">Interview</span>
+                      <span class="article-type">🎤 Expertengespräch</span>
+                      <span class="reading-time">📖 12 Min.</span>
                     </div>
                     <h3 class="article-title" data-index="1">
-                      Politische Entwicklungen im Fokus
+                      Exklusives Interview mit führenden Experten
+                    </h3>
+                    <div class="interview-preview">
+                      <span class="speaker">Dr. Expert Name:</span>
+                      "Platzhalter-Zitat aus dem Interview..."
+                    </div>
+                  </div>
+                </article>
+
+                <article class="article-card analysis" id="article2">
+                  <div class="article-image">
+                    <span class="article-badge">Analyse</span>
+                    <span class="article-type-badge analysis">📊 Analyse</span>
+                    <button class="bookmark-btn" data-index="2">🔖</button>
+                    <div class="image-placeholder">📈</div>
+                  </div>
+                  <div class="article-content">
+                    <div class="article-meta-top">
+                      <span class="category">Analyse</span>
+                      <span class="article-type">📊 Tiefenanalyse</span>
+                      <span class="reading-time">📖 10 Min.</span>
+                    </div>
+                    <h3 class="article-title" data-index="2">
+                      Hintergrundanalyse: Ursachen und Auswirkungen
                     </h3>
                     <p class="article-teaser">
-                      Platzhalter-Text für einen politischen Artikel.
+                      Eine tiefgehende Analyse der aktuellen Entwicklungen und
+                      ihrer Bedeutung.
                     </p>
                   </div>
                 </article>
 
-                <article class="article-card" id="article2">
+                <article class="article-card report" id="article3">
+                  <div class="article-image">
+                    <span class="article-badge">Bericht</span>
+                    <span class="article-type-badge report">📋 Bericht</span>
+                    <button class="bookmark-btn" data-index="3">🔖</button>
+                    <div class="image-placeholder">🔬</div>
+                  </div>
+                  <div class="article-content">
+                    <div class="article-meta-top">
+                      <span class="category">Wissenschaft</span>
+                      <span class="article-type">📋 Forschungsbericht</span>
+                      <span class="reading-time">📖 7 Min.</span>
+                    </div>
+                    <h3 class="article-title" data-index="3">
+                      Neue Erkenntnisse aus der Forschung
+                    </h3>
+                    <p class="article-teaser">
+                      Platzhalter-Text für einen Forschungsbericht.
+                    </p>
+                  </div>
+                </article>
+
+                <article class="article-card opinion" id="article4">
+                  <div class="article-image">
+                    <span class="article-badge">Meinung</span>
+                    <span class="article-type-badge opinion">💭 Meinung</span>
+                    <button class="bookmark-btn" data-index="4">🔖</button>
+                    <div class="image-placeholder">💬</div>
+                  </div>
+                  <div class="article-content">
+                    <div class="article-meta-top">
+                      <span class="category">Meinung</span>
+                      <span class="article-type">💭 Kommentar</span>
+                      <span class="reading-time">📖 6 Min.</span>
+                    </div>
+                    <h3 class="article-title" data-index="4">
+                      Kommentar: Was die Entwicklung für uns bedeutet
+                    </h3>
+                    <p class="article-teaser">
+                      Eine Einschätzung zu den aktuellen Geschehnissen.
+                    </p>
+                  </div>
+                </article>
+
+                <article class="article-card" id="article5">
                   <div class="article-image">
                     <span class="article-badge">Wirtschaft</span>
-                    <button class="bookmark-btn" data-index="2">🔖</button>
-                    <div class="image-placeholder">📊</div>
+                    <button class="bookmark-btn" data-index="5">🔖</button>
+                    <div class="image-placeholder">💼</div>
                   </div>
                   <div class="article-content">
                     <div class="article-meta-top">
                       <span class="category">Wirtschaft</span>
-                      <span class="reading-time">📖 3 Min.</span>
+                      <span class="reading-time">📖 5 Min.</span>
                     </div>
-                    <h3 class="article-title" data-index="2">
-                      Wirtschaftsnachrichten und Analysen
+                    <h3 class="article-title" data-index="5">
+                      Wirtschaftliche Auswirkungen im Detail
                     </h3>
                     <p class="article-teaser">
                       Platzhalter-Text für einen Wirtschaftsartikel.
@@ -1737,83 +2063,26 @@
                   </div>
                 </article>
 
-                <article class="article-card" id="article3">
+                <article class="article-card interview" id="article6">
                   <div class="article-image">
-                    <span class="article-badge">Wissenschaft</span>
-                    <button class="bookmark-btn" data-index="3">🔖</button>
-                    <div class="image-placeholder">🔬</div>
-                  </div>
-                  <div class="article-content">
-                    <div class="article-meta-top">
-                      <span class="category">Wissenschaft</span>
-                      <span class="reading-time">📖 5 Min.</span>
-                    </div>
-                    <h3 class="article-title" data-index="3">
-                      Wissenschaftliche Entdeckungen
-                    </h3>
-                    <p class="article-teaser">
-                      Platzhalter-Text für einen Wissenschaftsartikel.
-                    </p>
-                  </div>
-                </article>
-
-                <article class="article-card" id="article4">
-                  <div class="article-image">
-                    <span class="article-badge">Tech</span>
-                    <button class="bookmark-btn" data-index="4">🔖</button>
-                    <div class="image-placeholder">💻</div>
-                  </div>
-                  <div class="article-content">
-                    <div class="article-meta-top">
-                      <span class="category">Technologie</span>
-                      <span class="reading-time">📖 4 Min.</span>
-                    </div>
-                    <h3 class="article-title" data-index="4">
-                      Technologie-News und Innovationen
-                    </h3>
-                    <p class="article-teaser">
-                      Platzhalter-Text für einen Technologie-Artikel.
-                    </p>
-                  </div>
-                </article>
-
-                <article class="article-card" id="article5">
-                  <div class="article-image">
-                    <span class="article-badge">Sport</span>
-                    <button class="bookmark-btn" data-index="5">🔖</button>
-                    <div class="image-placeholder">⚽</div>
-                  </div>
-                  <div class="article-content">
-                    <div class="article-meta-top">
-                      <span class="category">Sport</span>
-                      <span class="reading-time">📖 3 Min.</span>
-                    </div>
-                    <h3 class="article-title" data-index="5">
-                      Sportnachrichten und Ergebnisse
-                    </h3>
-                    <p class="article-teaser">
-                      Platzhalter-Text für einen Sport-Artikel.
-                    </p>
-                  </div>
-                </article>
-
-                <article class="article-card" id="article6">
-                  <div class="article-image">
-                    <span class="article-badge">Kultur</span>
+                    <span class="article-badge">Interview</span>
+                    <span class="article-type-badge interview">🎤 Interview</span>
                     <button class="bookmark-btn" data-index="6">🔖</button>
-                    <div class="image-placeholder">🎭</div>
+                    <div class="image-placeholder">👤</div>
                   </div>
                   <div class="article-content">
                     <div class="article-meta-top">
-                      <span class="category">Kultur</span>
-                      <span class="reading-time">📖 4 Min.</span>
+                      <span class="category">Interview</span>
+                      <span class="article-type">🎤 Gespräch</span>
+                      <span class="reading-time">📖 15 Min.</span>
                     </div>
                     <h3 class="article-title" data-index="6">
-                      Kulturelle Events und Highlights
+                      Im Gespräch: Einblicke eines Insiders
                     </h3>
-                    <p class="article-teaser">
-                      Platzhalter-Text für einen Kultur-Artikel.
-                    </p>
+                    <div class="interview-preview">
+                      <span class="speaker">Interviewpartner:</span>
+                      "Platzhalter für ein Zitat..."
+                    </div>
                   </div>
                 </article>
               </div>
@@ -1822,6 +2091,27 @@
 
           <!-- Sidebar -->
           <aside class="sidebar">
+            <!-- Expert Voices -->
+            <div class="sidebar-widget">
+              <h3 class="widget-title">🎙️ Expertenstimmen</h3>
+              <div id="expertsList">
+                <div class="expert-card">
+                  <img
+                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face"
+                    alt="Expert"
+                    class="expert-avatar"
+                  />
+                  <div class="expert-info">
+                    <div class="expert-name">Dr. Beispiel Name</div>
+                    <div class="expert-role">Experte für Technologie</div>
+                    <div class="expert-quote">
+                      "Zitat wird nach Generierung angezeigt..."
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <!-- Trending -->
             <div class="sidebar-widget">
               <h3 class="widget-title">🔥 Trending</h3>
@@ -1847,13 +2137,6 @@
                     <span class="trend-meta">📈 1.2k Leser</span>
                   </div>
                 </li>
-                <li class="trending-item">
-                  <span class="trend-rank">4</span>
-                  <div class="trend-content">
-                    <p class="trend-title">Trending Artikel Nummer vier</p>
-                    <span class="trend-meta">📈 890 Leser</span>
-                  </div>
-                </li>
               </ul>
             </div>
 
@@ -1874,12 +2157,12 @@
                   <div class="label">Wörter</div>
                 </div>
                 <div class="stat-box">
-                  <div class="value" id="widgetBookmarks">0</div>
-                  <div class="label">Lesezeichen</div>
+                  <div class="value" id="widgetInterviews">0</div>
+                  <div class="label">Interviews</div>
                 </div>
                 <div class="stat-box">
-                  <div class="value" id="widgetTopics">0</div>
-                  <div class="label">Themen</div>
+                  <div class="value" id="widgetAnalyses">0</div>
+                  <div class="label">Analysen</div>
                 </div>
               </div>
             </div>
@@ -1909,7 +2192,8 @@
             <h4>AI NEWS DAILY</h4>
             <p>
               Eine Demo-Anwendung zur Generierung von KI-basierten
-              Nachrichtenartikeln mit OpenAI GPT.
+              Nachrichtenartikeln mit OpenAI GPT. Bilder bereitgestellt von
+              Unsplash.
             </p>
             <div class="social-links" style="margin-top: 15px">
               <a href="#" class="social-link">📘</a>
@@ -1919,13 +2203,13 @@
             </div>
           </div>
           <div class="footer-section">
-            <h4>Kategorien</h4>
+            <h4>Artikeltypen</h4>
             <ul>
-              <li><a href="#">Politik</a></li>
-              <li><a href="#">Wirtschaft</a></li>
-              <li><a href="#">Technologie</a></li>
-              <li><a href="#">Wissenschaft</a></li>
-              <li><a href="#">Sport</a></li>
+              <li><a href="#">📋 Berichte</a></li>
+              <li><a href="#">🎤 Interviews</a></li>
+              <li><a href="#">📊 Analysen</a></li>
+              <li><a href="#">💭 Meinungen</a></li>
+              <li><a href="#">⚡ Eilmeldungen</a></li>
             </ul>
           </div>
           <div class="footer-section">
@@ -1943,12 +2227,15 @@
             <p>
               ⚠️ Alle Artikel werden von KI generiert und können fiktive
               Informationen enthalten. Nicht als echte Nachrichtenquelle
-              verwenden.
+              verwenden. Bilder von Unsplash.
             </p>
           </div>
         </div>
         <div class="footer-bottom">
-          <p>© 2024 AI News Daily Pro | Powered by OpenAI GPT | Made with ❤️</p>
+          <p>
+            © 2024 AI News Daily Pro | Powered by OpenAI GPT | Images by
+            Unsplash | Made with ❤️
+          </p>
         </div>
       </div>
     </footer>
@@ -2018,7 +2305,7 @@
               <input
                 type="range"
                 id="articleCount"
-                min="3"
+                min="5"
                 max="12"
                 value="7"
               />
@@ -2026,10 +2313,27 @@
             <div class="form-group">
               <label>Artikellänge</label>
               <select id="lengthSelect">
-                <option value="short">Kurz (2 Absätze)</option>
-                <option value="medium" selected>Mittel (3-4 Absätze)</option>
-                <option value="long">Lang (5-6 Absätze)</option>
+                <option value="medium">Mittel (4-5 Absätze)</option>
+                <option value="long" selected>Lang (6-8 Absätze)</option>
+                <option value="extended">Sehr lang (10+ Absätze)</option>
               </select>
+            </div>
+            <div class="form-group">
+              <label>Artikeltypen</label>
+              <div style="display: flex; flex-direction: column; gap: 8px">
+                <label style="display: flex; align-items: center; gap: 8px">
+                  <input type="checkbox" id="includeInterviews" checked />
+                  🎤 Interviews einbeziehen
+                </label>
+                <label style="display: flex; align-items: center; gap: 8px">
+                  <input type="checkbox" id="includeAnalyses" checked />
+                  📊 Analysen einbeziehen
+                </label>
+                <label style="display: flex; align-items: center; gap: 8px">
+                  <input type="checkbox" id="includeOpinions" checked />
+                  💭 Meinungsbeiträge einbeziehen
+                </label>
+              </div>
             </div>
           </div>
 
@@ -2047,21 +2351,21 @@
             </div>
             <div class="toggle-group">
               <div class="toggle-label">
-                <span>🔔 Benachrichtigungen</span>
-                <span>Toast-Meldungen anzeigen</span>
+                <span>🖼️ Unsplash Bilder</span>
+                <span>Automatisch passende Bilder laden</span>
               </div>
               <label class="toggle-switch">
-                <input type="checkbox" id="notificationsToggle" checked />
+                <input type="checkbox" id="unsplashToggle" checked />
                 <span class="toggle-slider"></span>
               </label>
             </div>
             <div class="toggle-group">
               <div class="toggle-label">
-                <span>✨ Animationen</span>
-                <span>UI-Animationen aktivieren</span>
+                <span>🔔 Benachrichtigungen</span>
+                <span>Toast-Meldungen anzeigen</span>
               </div>
               <label class="toggle-switch">
-                <input type="checkbox" id="animationsToggle" checked />
+                <input type="checkbox" id="notificationsToggle" checked />
                 <span class="toggle-slider"></span>
               </label>
             </div>
@@ -2081,30 +2385,77 @@
     <!-- Article Modal -->
     <div class="modal" id="articleModal">
       <div class="modal-content article-modal-content">
-        <div class="modal-header">
-          <span class="category" id="modalCategory">Kategorie</span>
-          <button class="close-btn" id="closeArticle">×</button>
-        </div>
-        <div class="modal-body">
-          <div class="article-modal-image" id="modalImage">📰</div>
-          <h1 class="article-modal-title" id="modalTitle">Artikel Titel</h1>
-          <div class="article-modal-meta">
-            <span>👤 AI Redakteur</span>
-            <span id="modalDate">📅 Heute</span>
-            <span id="modalReadingTime">📖 5 Min. Lesezeit</span>
+        <div class="article-modal-hero" id="modalHero">
+          <img
+            src=""
+            alt="Article Image"
+            id="modalHeroImage"
+            style="display: none"
+          />
+          <div
+            class="image-placeholder"
+            id="modalHeroPlaceholder"
+            style="
+              height: 100%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 5rem;
+              background: linear-gradient(135deg, #667eea, #764ba2);
+            "
+          >
+            📰
           </div>
-          <div class="article-modal-content" id="modalContent">
+          <div class="article-modal-hero-overlay">
+            <span class="article-modal-type" id="modalType">Bericht</span>
+            <h1 class="article-modal-title" id="modalTitle">Artikel Titel</h1>
+            <div class="article-modal-meta">
+              <span>👤 <span id="modalAuthor">AI Redakteur</span></span>
+              <span id="modalDate">📅 Heute</span>
+              <span id="modalReadingTime">📖 10 Min. Lesezeit</span>
+            </div>
+          </div>
+          <button
+            class="close-btn"
+            id="closeArticle"
+            style="
+              position: absolute;
+              top: 15px;
+              right: 15px;
+              background: rgba(255, 255, 255, 0.9);
+            "
+          >
+            ×
+          </button>
+        </div>
+
+        <div class="article-modal-body">
+          <p class="article-lead" id="modalLead">
+            Der Einleitungstext des Artikels erscheint hier...
+          </p>
+
+          <div class="article-content-text" id="modalContent">
             <p>Artikel-Inhalt wird hier angezeigt...</p>
           </div>
-          <div class="article-modal-footer">
-            <div class="share-section">
-              <h4>Artikel teilen</h4>
-              <div class="share-buttons">
-                <button class="share-btn">📋 Kopieren</button>
-                <button class="share-btn">🐦 Twitter</button>
-                <button class="share-btn">📘 Facebook</button>
-                <button class="share-btn">💼 LinkedIn</button>
-              </div>
+        </div>
+
+        <div class="article-modal-footer">
+          <div class="article-tags">
+            <h4>🏷️ Schlagworte</h4>
+            <div class="tags-cloud" id="modalTags">
+              <span class="tag">Tag 1</span>
+              <span class="tag">Tag 2</span>
+            </div>
+          </div>
+          <div class="share-section" style="margin-top: 20px">
+            <h4>📤 Artikel teilen</h4>
+            <div class="share-buttons">
+              <button class="share-btn" onclick="copyArticle()">
+                📋 Kopieren
+              </button>
+              <button class="share-btn">🐦 Twitter</button>
+              <button class="share-btn">📘 Facebook</button>
+              <button class="share-btn">💼 LinkedIn</button>
             </div>
           </div>
         </div>
@@ -2139,28 +2490,71 @@
         model: "gpt-4",
         style: "formal",
         articleCount: 7,
-        articleLength: "medium",
+        articleLength: "long",
         darkMode: false,
         showNotifications: true,
-        showAnimations: true,
+        useUnsplash: true,
+        includeInterviews: true,
+        includeAnalyses: true,
+        includeOpinions: true,
         articles: [],
+        experts: [],
         bookmarks: new Set(),
         topicsHistory: [],
         isGenerating: false,
         generationTime: 0,
+        imageCount: 0,
       };
 
       const surpriseTopics = [
-        "Quantencomputer Durchbruch",
-        "Mars Kolonisierung",
-        "Autonomes Fahren",
+        "Quantencomputer Durchbruch 2024",
+        "Mars Kolonisierung und SpaceX",
+        "Autonomes Fahren in Deutschland",
         "Erneuerbare Energien Revolution",
-        "KI in der Medizin",
-        "Virtuelle Realität im Alltag",
-        "Blockchain und Web3",
-        "Biotechnologie Fortschritte",
+        "KI in der Medizin und Diagnostik",
+        "Virtual Reality im Alltag",
+        "Blockchain und Web3 Zukunft",
+        "Biotechnologie und Gentherapie",
         "Smart Cities der Zukunft",
-        "Nachhaltigkeit im Business",
+        "Nachhaltigkeit im Unternehmen",
+      ];
+
+      const articleTypes = [
+        {
+          type: "report",
+          label: "Bericht",
+          icon: "📋",
+          class: "report",
+          color: "#4facfe",
+        },
+        {
+          type: "interview",
+          label: "Interview",
+          icon: "🎤",
+          class: "interview",
+          color: "#667eea",
+        },
+        {
+          type: "analysis",
+          label: "Analyse",
+          icon: "📊",
+          class: "analysis",
+          color: "#f5576c",
+        },
+        {
+          type: "opinion",
+          label: "Meinung",
+          icon: "💭",
+          class: "opinion",
+          color: "#43e97b",
+        },
+        {
+          type: "breaking",
+          label: "Eilmeldung",
+          icon: "⚡",
+          class: "breaking",
+          color: "#fa709a",
+        },
       ];
 
       // ================================
@@ -2219,6 +2613,7 @@
             const input = document.getElementById("apiKey");
             input.type = input.type === "password" ? "text" : "password";
           });
+
         document
           .getElementById("testApiBtn")
           .addEventListener("click", testApiConnection);
@@ -2230,6 +2625,7 @@
             document.getElementById("articleCountValue").textContent =
               e.target.value;
           });
+
         document
           .getElementById("saveSettings")
           .addEventListener("click", saveSettings);
@@ -2374,8 +2770,13 @@
         state.showNotifications = document.getElementById(
           "notificationsToggle"
         ).checked;
-        state.showAnimations =
-          document.getElementById("animationsToggle").checked;
+        state.useUnsplash = document.getElementById("unsplashToggle").checked;
+        state.includeInterviews =
+          document.getElementById("includeInterviews").checked;
+        state.includeAnalyses =
+          document.getElementById("includeAnalyses").checked;
+        state.includeOpinions =
+          document.getElementById("includeOpinions").checked;
 
         showToast(
           "✅ Gespeichert",
@@ -2390,7 +2791,7 @@
         document.getElementById("styleSelect").value = "formal";
         document.getElementById("articleCount").value = 7;
         document.getElementById("articleCountValue").textContent = "7";
-        document.getElementById("lengthSelect").value = "medium";
+        document.getElementById("lengthSelect").value = "long";
         showToast(
           "🔄 Zurückgesetzt",
           "Standardeinstellungen wiederhergestellt",
@@ -2428,6 +2829,21 @@
       }
 
       // ================================
+      // Unsplash Image Functions
+      // ================================
+      function getUnsplashImage(query, width = 800, height = 600) {
+        // Using Unsplash Source API for random relevant images
+        const encodedQuery = encodeURIComponent(query);
+        return `https://source.unsplash.com/${width}x${height}/?${encodedQuery}`;
+      }
+
+      function getUnsplashImageWithId(query, seed) {
+        // Using random seed to get consistent but different images
+        const encodedQuery = encodeURIComponent(query);
+        return `https://source.unsplash.com/800x600/?${encodedQuery}&sig=${seed}`;
+      }
+
+      // ================================
       // News Generation
       // ================================
       async function generateNews() {
@@ -2452,19 +2868,24 @@
 
         state.isGenerating = true;
         const startTime = Date.now();
+
         showLoading(true);
 
         try {
           updateLoadingStatus("Analysiere Thema...", 10);
           await delay(300);
 
-          updateLoadingStatus("Generiere Artikel...", 30);
-          const articles = await callOpenAI(topic);
+          updateLoadingStatus("Generiere diverse Artikel...", 25);
+          const result = await callOpenAI(topic);
 
-          updateLoadingStatus("Formatiere Inhalte...", 70);
+          updateLoadingStatus("Lade Bilder von Unsplash...", 60);
+          await loadImages(result.articles, topic);
+
+          updateLoadingStatus("Formatiere Inhalte...", 85);
           await delay(200);
 
-          displayArticles(articles);
+          displayArticles(result.articles);
+          displayExperts(result.experts);
 
           updateLoadingStatus("Abgeschlossen!", 100);
           await delay(300);
@@ -2475,7 +2896,7 @@
 
           showToast(
             "✅ Fertig!",
-            `${articles.length} Artikel generiert`,
+            `${result.articles.length} Artikel generiert`,
             "success"
           );
         } catch (error) {
@@ -2489,38 +2910,77 @@
 
       async function callOpenAI(topic) {
         const lengthInstructions = {
-          short: "2 kurze Absätze",
-          medium: "3-4 Absätze",
-          long: "5-6 detaillierte Absätze",
+          medium:
+            "4-5 ausführliche Absätze pro Artikel (mindestens 300 Wörter)",
+          long: "6-8 sehr ausführliche Absätze pro Artikel (mindestens 500 Wörter)",
+          extended:
+            "10-12 umfassende Absätze pro Artikel (mindestens 800 Wörter)",
         };
 
         const styleInstructions = {
-          formal: "seriösen, formellen Nachrichtenstil",
-          casual: "modernen, lockeren aber informativen Stil",
-          tabloid: "reißerischen Boulevard-Stil",
-          scientific: "wissenschaftlich-präzisen Stil",
+          formal: "seriösen, formellen Nachrichtenstil wie bei der FAZ",
+          casual:
+            "modernen, lockeren aber informativen Stil wie bei einem Online-Magazin",
+          tabloid: "reißerischen Boulevard-Stil mit emotionaler Ansprache",
+          scientific:
+            "wissenschaftlich-präzisen Stil mit Quellenangaben und Fachbegriffen",
         };
 
-        const prompt = `Generiere ${
-          state.articleCount
-        } Nachrichtenartikel zum Thema "${topic}".
+        // Build article types to include
+        const typesToInclude = ["report"];
+        if (state.includeInterviews) typesToInclude.push("interview");
+        if (state.includeAnalyses) typesToInclude.push("analysis");
+        if (state.includeOpinions) typesToInclude.push("opinion");
 
-Stil: ${styleInstructions[state.style]}
-Länge: ${lengthInstructions[state.articleLength]}
+        const prompt = `Generiere ${state.articleCount} diverse und ausführliche Nachrichtenartikel zum Thema "${topic}".
 
-Antworte NUR mit JSON:
+WICHTIG - ARTIKELTYPEN (verwende diese Vielfalt):
+${typesToInclude.includes("report") ? '- "report": Klassischer Nachrichtenbericht mit Fakten und Hintergründen' : ""}
+${typesToInclude.includes("interview") ? '- "interview": Fiktives Interview mit einem Experten (mit Fragen und Antworten im Dialog-Format)' : ""}
+${typesToInclude.includes("analysis") ? '- "analysis": Tiefgehende Analyse mit Einordnung und Prognosen' : ""}
+${typesToInclude.includes("opinion") ? '- "opinion": Meinungsbeitrag/Kommentar mit klarer Haltung' : ""}
+
+STIL: ${styleInstructions[state.style]}
+LÄNGE: ${lengthInstructions[state.articleLength]}
+
+WICHTIGE ANFORDERUNGEN:
+1. Jeder Artikel muss SEHR ausführlich sein (${state.articleLength === "extended" ? "800+" : state.articleLength === "long" ? "500+" : "300+"} Wörter)
+2. Bei INTERVIEWS: Verwende ein echtes Frage-Antwort-Format mit mindestens 5-7 Fragen
+3. Erstelle fiktive aber realistische Expertennamen und Positionen
+4. Füge Zwischenüberschriften ein (mit ### markiert)
+5. Inkludiere relevante Zitate
+6. Gib Suchbegriffe für Unsplash-Bilder an (englisch, 2-3 Wörter)
+
+Antworte NUR mit diesem JSON-Format:
 {
     "articles": [
         {
-            "title": "Überschrift (max 80 Zeichen)",
-            "teaser": "Teaser (max 120 Zeichen)",
-            "content": "Artikeltext",
-            "category": "Kategorie",
-            "emoji": "passendes Emoji",
-            "tags": ["tag1", "tag2"]
+            "type": "report|interview|analysis|opinion",
+            "title": "Aussagekräftige Überschrift (max 100 Zeichen)",
+            "teaser": "Neugierig machender Teaser (max 150 Zeichen)",
+            "lead": "Einleitender Absatz der die wichtigsten Fakten zusammenfasst (2-3 Sätze)",
+            "content": "Der vollständige, ausführliche Artikeltext mit ### für Zwischenüberschriften. Bei Interviews: Verwende 'F: Frage' und 'A: Antwort' Format.",
+            "category": "Passende Kategorie",
+            "emoji": "Passendes Emoji",
+            "tags": ["tag1", "tag2", "tag3", "tag4"],
+            "imageQuery": "englische Suchbegriffe für Unsplash",
+            "author": "Fiktiver Autorenname",
+            "interviewee": {
+                "name": "Name des Interviewpartners (nur bei interviews)",
+                "role": "Position/Titel",
+                "quote": "Markantes Zitat aus dem Interview"
+            }
         }
     ],
-    "breakingNews": "Eilmeldung (max 80 Zeichen)"
+    "experts": [
+        {
+            "name": "Dr. Expertenname",
+            "role": "Position und Institution",
+            "quote": "Kurzes prägnantes Zitat zum Thema",
+            "imageQuery": "professional portrait"
+        }
+    ],
+    "breakingNews": "Eilmeldung zum Thema (max 100 Zeichen)"
 }`;
 
         const response = await fetch(
@@ -2537,12 +2997,12 @@ Antworte NUR mit JSON:
                 {
                   role: "system",
                   content:
-                    "Du bist ein Nachrichtenredakteur. Antworte nur mit JSON.",
+                    "Du bist ein erfahrener Nachrichtenredakteur, der ausführliche, gut recherchierte Artikel schreibt. Du erstellst verschiedene Artikelformate und achtest auf journalistische Qualität. Antworte ausschließlich mit validem JSON.",
                 },
                 { role: "user", content: prompt },
               ],
-              temperature: 0.8,
-              max_tokens: 4000,
+              temperature: 0.85,
+              max_tokens: 8000,
             }),
           }
         );
@@ -2559,29 +3019,71 @@ Antworte NUR mit JSON:
         if (jsonMatch) {
           const parsed = JSON.parse(jsonMatch[0]);
           state.articles = parsed.articles;
+          state.experts = parsed.experts || [];
+
           if (parsed.breakingNews) {
             document.getElementById("breakingText").textContent =
               parsed.breakingNews;
           }
-          return parsed.articles;
+
+          return parsed;
         }
 
-        throw new Error("Ungültige Antwort");
+        throw new Error("Ungültige Antwort vom Server");
+      }
+
+      async function loadImages(articles, topic) {
+        if (!state.useUnsplash) return;
+
+        state.imageCount = 0;
+
+        for (let i = 0; i < articles.length; i++) {
+          const article = articles[i];
+          const query = article.imageQuery || topic;
+          article.imageUrl = getUnsplashImageWithId(query, i + Date.now());
+          state.imageCount++;
+        }
       }
 
       function displayArticles(articles) {
-        // Hero Article
-        if (articles[0]) updateArticle("heroArticle", articles[0], true);
-
-        // Grid Articles
-        for (let i = 1; i < Math.min(articles.length, 7); i++) {
-          updateArticle(`article${i}`, articles[i]);
+        // Hero Article (first report or first article)
+        const heroArticle =
+          articles.find((a) => a.type === "report") || articles[0];
+        if (heroArticle) {
+          updateHeroArticle(heroArticle);
         }
 
-        // Trending
+        // Regenerate article grid
+        const grid = document.getElementById("articlesGrid");
+        grid.innerHTML = "";
+
+        const otherArticles = articles.filter((a) => a !== heroArticle);
+
+        otherArticles.forEach((article, index) => {
+          const card = createArticleCard(article, index + 1);
+          grid.appendChild(card);
+        });
+
+        // Rebind click events
+        document.querySelectorAll(".article-title").forEach((title) => {
+          title.addEventListener("click", () => {
+            const index = parseInt(title.dataset.index);
+            openArticle(index);
+          });
+        });
+
+        document.querySelectorAll(".bookmark-btn").forEach((btn) => {
+          btn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            toggleBookmark(parseInt(btn.dataset.index));
+            btn.classList.toggle("active");
+          });
+        });
+
+        // Update trending
         updateTrending(articles);
 
-        // Tags
+        // Update tags
         updateTags(articles);
 
         // Show stats bar
@@ -2590,45 +3092,161 @@ Antworte NUR mit JSON:
         document.getElementById("statTime").textContent = state.generationTime;
         document.getElementById("statModel").textContent =
           state.model.toUpperCase();
+        document.getElementById("statImages").textContent = state.imageCount;
       }
 
-      function updateArticle(id, article, featured = false) {
-        const el = document.getElementById(id);
-        if (!el || !article) return;
+      function updateHeroArticle(article) {
+        const el = document.getElementById("heroArticle");
 
-        el.classList.add("generated");
+        // Update image
+        const imageContainer = el.querySelector(".article-image");
+        if (state.useUnsplash && article.imageUrl) {
+          imageContainer.innerHTML = `
+                    <span class="article-badge ai">🤖 KI-Generiert</span>
+                    <span class="article-type-badge ${article.type}">${getArticleTypeInfo(article.type).icon} ${getArticleTypeInfo(article.type).label}</span>
+                    <button class="bookmark-btn" data-index="0">🔖</button>
+                    <img src="${article.imageUrl}" alt="${article.title}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="image-placeholder" style="display:none;">${article.emoji || "📰"}</div>
+                    <span class="image-credit">📷 Unsplash</span>
+                `;
+        } else {
+          imageContainer.innerHTML = `
+                    <span class="article-badge ai">🤖 KI-Generiert</span>
+                    <span class="article-type-badge ${article.type}">${getArticleTypeInfo(article.type).icon} ${getArticleTypeInfo(article.type).label}</span>
+                    <button class="bookmark-btn" data-index="0">🔖</button>
+                    <div class="image-placeholder">${article.emoji || "📰"}</div>
+                `;
+        }
+
+        // Update content
+        el.querySelector(".category").textContent = article.category;
+        el.querySelector(".article-type").textContent = `${getArticleTypeInfo(article.type).icon} ${getArticleTypeInfo(article.type).label}`;
 
         const title = el.querySelector(".article-title");
-        const teaser = el.querySelector(".article-teaser");
-        const category = el.querySelector(".category");
-        const badge = el.querySelector(".article-badge");
-        const placeholder = el.querySelector(".image-placeholder");
+        title.textContent = article.title;
+        title.dataset.index = "0";
 
-        if (title) title.textContent = article.title;
-        if (teaser) teaser.textContent = article.teaser;
-        if (category) category.textContent = article.category;
-        if (badge) badge.textContent = article.category;
-        if (placeholder) placeholder.textContent = article.emoji || "📰";
+        el.querySelector(".article-teaser").textContent =
+          article.teaser || article.lead;
 
-        // Reading time
-        const readingTime = el.querySelector(".reading-time");
-        if (readingTime) {
-          const words = article.content.split(" ").length;
-          readingTime.textContent = `📖 ${Math.max(
-            1,
-            Math.ceil(words / 200)
-          )} Min.`;
+        // Update reading time
+        const words = article.content.split(" ").length;
+        el.querySelector(".reading-time").textContent = `📖 ${Math.max(1, Math.ceil(words / 200))} Min.`;
+
+        el.querySelector(".article-meta").innerHTML = `
+                <span>👤 ${article.author || "AI Redakteur"}</span>
+                <span>🕐 Gerade eben</span>
+            `;
+      }
+
+      function createArticleCard(article, index) {
+        const typeInfo = getArticleTypeInfo(article.type);
+        const words = article.content.split(" ").length;
+        const readingTime = Math.max(1, Math.ceil(words / 200));
+
+        const card = document.createElement("article");
+        card.className = `article-card ${article.type}`;
+        card.id = `article${index}`;
+
+        let previewContent = "";
+        if (article.type === "interview" && article.interviewee) {
+          previewContent = `
+                    <div class="interview-preview">
+                        <span class="speaker">${article.interviewee.name}:</span>
+                        "${article.interviewee.quote || article.teaser}"
+                    </div>
+                `;
+        } else {
+          previewContent = `<p class="article-teaser">${article.teaser}</p>`;
         }
+
+        let imageHtml = "";
+        if (state.useUnsplash && article.imageUrl) {
+          imageHtml = `
+                    <img src="${article.imageUrl}" alt="${article.title}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="image-placeholder" style="display:none;">${article.emoji || "📰"}</div>
+                    <span class="image-credit">📷 Unsplash</span>
+                `;
+        } else {
+          imageHtml = `<div class="image-placeholder">${article.emoji || "📰"}</div>`;
+        }
+
+        card.innerHTML = `
+                <div class="article-image">
+                    <span class="article-badge">${article.category}</span>
+                    <span class="article-type-badge ${article.type}">${typeInfo.icon} ${typeInfo.label}</span>
+                    <button class="bookmark-btn" data-index="${index}">🔖</button>
+                    ${imageHtml}
+                </div>
+                <div class="article-content">
+                    <div class="article-meta-top">
+                        <span class="category">${article.category}</span>
+                        <span class="article-type">${typeInfo.icon} ${typeInfo.label}</span>
+                        <span class="reading-time">📖 ${readingTime} Min.</span>
+                    </div>
+                    <h3 class="article-title" data-index="${index}">${article.title}</h3>
+                    ${previewContent}
+                    <div class="article-footer">
+                        <div class="article-meta">
+                            <span>👤 ${article.author || "AI Redakteur"}</span>
+                        </div>
+                        <div class="article-actions">
+                            <button class="action-btn" title="Teilen">📤</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+        return card;
+      }
+
+      function getArticleTypeInfo(type) {
+        const found = articleTypes.find((t) => t.type === type);
+        return (
+          found || { type: "report", label: "Bericht", icon: "📋", class: "" }
+        );
+      }
+
+      function displayExperts(experts) {
+        if (!experts || experts.length === 0) return;
+
+        const container = document.getElementById("expertsList");
+        container.innerHTML = experts
+          .slice(0, 3)
+          .map(
+            (expert, index) => `
+                <div class="expert-card">
+                    <img src="${getUnsplashImageWithId(expert.imageQuery || "professional portrait", index + 100)}"
+                         alt="${expert.name}"
+                         class="expert-avatar"
+                         onerror="this.src='https://via.placeholder.com/60?text=👤'">
+                    <div class="expert-info">
+                        <div class="expert-name">${expert.name}</div>
+                        <div class="expert-role">${expert.role}</div>
+                        <div class="expert-quote">"${expert.quote}"</div>
+                    </div>
+                </div>
+            `
+          )
+          .join("");
       }
 
       function updateTrending(articles) {
-        const items = document.querySelectorAll(".trending-item");
-        articles.slice(0, 4).forEach((article, i) => {
-          if (items[i]) {
-            const title = items[i].querySelector(".trend-title");
-            if (title) title.textContent = article.title;
-          }
-        });
+        const list = document.getElementById("trendingList");
+        list.innerHTML = articles
+          .slice(0, 4)
+          .map(
+            (article, i) => `
+                <li class="trending-item" onclick="openArticle(${i})">
+                    <span class="trend-rank">${i + 1}</span>
+                    <div class="trend-content">
+                        <p class="trend-title">${article.title}</p>
+                        <span class="trend-meta">${getArticleTypeInfo(article.type).icon} ${getArticleTypeInfo(article.type).label} • 📈 ${Math.floor(Math.random() * 2000 + 500)} Leser</span>
+                    </div>
+                </li>
+            `
+          )
+          .join("");
       }
 
       function updateTags(articles) {
@@ -2640,7 +3258,7 @@ Antworte NUR mit JSON:
 
         const cloud = document.getElementById("tagsCloud");
         cloud.innerHTML = Array.from(allTags)
-          .slice(0, 8)
+          .slice(0, 10)
           .map((tag) => `<span class="tag">${tag}</span>`)
           .join("");
       }
@@ -2655,10 +3273,32 @@ Antworte NUR mit JSON:
           return;
         }
 
-        document.getElementById("modalCategory").textContent = article.category;
+        const typeInfo = getArticleTypeInfo(article.type);
+
+        // Set hero image
+        const heroImage = document.getElementById("modalHeroImage");
+        const heroPlaceholder = document.getElementById("modalHeroPlaceholder");
+
+        if (state.useUnsplash && article.imageUrl) {
+          heroImage.src = article.imageUrl;
+          heroImage.style.display = "block";
+          heroPlaceholder.style.display = "none";
+        } else {
+          heroImage.style.display = "none";
+          heroPlaceholder.style.display = "flex";
+          heroPlaceholder.textContent = article.emoji || "📰";
+        }
+
+        // Set type badge
+        const typeBadge = document.getElementById("modalType");
+        typeBadge.textContent = `${typeInfo.icon} ${typeInfo.label}`;
+        typeBadge.className = `article-modal-type`;
+        typeBadge.style.background = typeInfo.color;
+
+        // Set basic info
         document.getElementById("modalTitle").textContent = article.title;
-        document.getElementById("modalImage").textContent =
-          article.emoji || "📰";
+        document.getElementById("modalAuthor").textContent =
+          article.author || "AI Redakteur";
         document.getElementById(
           "modalDate"
         ).textContent = `📅 ${new Date().toLocaleDateString("de-DE")}`;
@@ -2666,18 +3306,102 @@ Antworte NUR mit JSON:
         const words = article.content.split(" ").length;
         document.getElementById(
           "modalReadingTime"
-        ).textContent = `📖 ${Math.max(1, Math.ceil(words / 200))} Min.`;
+        ).textContent = `📖 ${Math.max(1, Math.ceil(words / 200))} Min. Lesezeit`;
 
-        const contentHtml = article.content
-          .split("\n\n")
-          .filter((p) => p.trim())
-          .map((p) => `<p>${p}</p>`)
+        // Set lead
+        document.getElementById("modalLead").textContent =
+          article.lead || article.teaser;
+
+        // Format content based on article type
+        let formattedContent = formatArticleContent(article);
+        document.getElementById("modalContent").innerHTML = formattedContent;
+
+        // Set tags
+        const tagsHtml = (article.tags || [])
+          .map((tag) => `<span class="tag">${tag}</span>`)
           .join("");
-
-        document.getElementById("modalContent").innerHTML =
-          contentHtml || `<p>${article.content}</p>`;
+        document.getElementById("modalTags").innerHTML = tagsHtml;
 
         openModal("articleModal");
+      }
+
+      function formatArticleContent(article) {
+        let content = article.content;
+        let html = "";
+
+        // Add interviewee info for interviews
+        if (article.type === "interview" && article.interviewee) {
+          html += `
+                    <div class="interviewee-info">
+                        <img src="${getUnsplashImageWithId(article.interviewee.imageQuery || "professional portrait business", Date.now())}"
+                             alt="${article.interviewee.name}"
+                             class="interviewee-avatar"
+                             onerror="this.src='https://via.placeholder.com/80?text=👤'">
+                        <div class="interviewee-details">
+                            <h4>${article.interviewee.name}</h4>
+                            <p>${article.interviewee.role}</p>
+                        </div>
+                    </div>
+                `;
+        }
+
+        // Process content
+        const paragraphs = content.split("\n\n").filter((p) => p.trim());
+
+        paragraphs.forEach((para) => {
+          para = para.trim();
+
+          // Handle headers
+          if (para.startsWith("###")) {
+            html += `<h3>${para.replace(/^###\s*/, "")}</h3>`;
+          }
+          // Handle interview Q&A
+          else if (para.startsWith("F:") || para.startsWith("Frage:")) {
+            const question = para.replace(/^(F:|Frage:)\s*/, "");
+            html += `
+                        <div class="interview-block">
+                            <div class="interview-question">${question}</div>
+                        `;
+          } else if (para.startsWith("A:") || para.startsWith("Antwort:")) {
+            const answer = para.replace(/^(A:|Antwort:)\s*/, "");
+            html += `
+                            <div class="interview-answer">${answer}</div>
+                        </div>
+                        `;
+          }
+          // Handle quotes
+          else if (para.startsWith('"') && para.includes('" –')) {
+            const parts = para.split('" –');
+            html += `
+                        <div class="quote-block">
+                            <p>"${parts[0].replace(/^"/, "")}"</p>
+                            <cite>– ${parts[1] || ""}</cite>
+                        </div>
+                        `;
+          }
+          // Handle info boxes (marked with [INFO])
+          else if (para.includes("[INFO]")) {
+            html += `
+                        <div class="info-box">
+                            <div class="info-box-title">ℹ️ Hintergrund</div>
+                            <p>${para.replace("[INFO]", "").trim()}</p>
+                        </div>
+                        `;
+          }
+          // Regular paragraphs
+          else {
+            html += `<p>${para}</p>`;
+          }
+        });
+
+        return html;
+      }
+
+      function copyArticle() {
+        const title = document.getElementById("modalTitle").textContent;
+        const content = document.getElementById("modalContent").innerText;
+        navigator.clipboard.writeText(`${title}\n\n${content}`);
+        showToast("📋 Kopiert", "Artikel in Zwischenablage kopiert", "success");
       }
 
       // ================================
@@ -2698,13 +3422,18 @@ Antworte NUR mit JSON:
           0
         );
 
+        const interviewCount = state.articles.filter(
+          (a) => a.type === "interview"
+        ).length;
+        const analysisCount = state.articles.filter(
+          (a) => a.type === "analysis"
+        ).length;
+
         document.getElementById("widgetArticleCount").textContent =
           state.articles.length;
         document.getElementById("widgetWordCount").textContent = wordCount;
-        document.getElementById("widgetBookmarks").textContent =
-          state.bookmarks.size;
-        document.getElementById("widgetTopics").textContent =
-          state.topicsHistory.length;
+        document.getElementById("widgetInterviews").textContent = interviewCount;
+        document.getElementById("widgetAnalyses").textContent = analysisCount;
       }
 
       // ================================
@@ -2736,6 +3465,7 @@ Antworte NUR mit JSON:
         if (!state.showNotifications) return;
 
         const icons = { success: "✅", error: "❌", warning: "⚠️", info: "ℹ️" };
+
         const toast = document.createElement("div");
         toast.className = `toast ${type}`;
         toast.innerHTML = `
